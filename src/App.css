@@ -74,26 +74,34 @@
   text-align: center;
 }
 
-.submit {
-  width: 12em;
+.paragraph {
+  font-size: 2em;
+  padding: 1em 4em;
+}
+
+.formContainer {
+  background-color: rgb(78, 11, 11);
+  position: fixed;
+  min-width: 60%;
+  width: 60%;
+  margin-top: 10%;
+  padding: 2%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.formTitle {
+  font-family: "Raleway";
+  color: white;
+  text-align: center;
+  letter-spacing: 2px;
+  font-size: 2em;
+}
+
+.formSubtitle {
+  font-family: "Raleway";
+  color: white;
+  text-align: center;
+  letter-spacing: 2px;
   font-size: 1.5em;
-  color: azure;
-  background-color: #402f80;
-  position: relative;
-}
-
-.submit:hover,
-.submit:focus {
-  background: #1c0444;
-}
-
-@media (min-width: 992px) {
-  .title {
-    padding: 2em 2em 1em 2em;
-  }
-
-  .paragraph {
-    font-size: 2em;
-    padding: 1em 4em;
-  }
 }

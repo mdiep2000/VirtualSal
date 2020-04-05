@@ -13,6 +13,13 @@ class VirtualSal extends Component {
       signedIn: false,
     };
   }
+
+  handleSignIn = () => {
+    alert("You are now signed in!");
+    this.setState({ signedIn: true });
+    window.location.assign("http://localhost:3000/dashboard");
+  };
+
   render() {
     return (
       <Router>
@@ -23,10 +30,10 @@ class VirtualSal extends Component {
               <Landing />
             </Route>
             <Route path="/signin">
-              <SignIn />
+              <SignIn signIn={this.handleSignIn} />
             </Route>
             <Route path="/signup">
-              <SignUp />
+              <SignUp signIn={this.handleSignIn} />
             </Route>
             <Route path="/dashboard">
               <Dashboard />

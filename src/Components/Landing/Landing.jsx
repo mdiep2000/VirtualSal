@@ -5,7 +5,7 @@ class Landing extends Component {
   state = {};
   render() {
     return (
-      <div class="landingContainer">
+      <div className="landingContainer">
         <Link to="/signin">
           <button className="landingButton">SIGN IN</button>
         </Link>

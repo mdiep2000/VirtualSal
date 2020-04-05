@@ -6,7 +6,7 @@ class Dashboard extends Component {
     this.state = {};
   }
   UserDependent() {
-    if (this.props.signedIn == true) {
+    if (this.props.signedIn === true) {
       return <h1>DashBoard for SignIn User</h1>;
     } else {
       return <h1>DashBoard for Guest</h1>;
