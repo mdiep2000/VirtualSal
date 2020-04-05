@@ -1,16 +1,22 @@
 import React, { Component } from "react";
 import "./Landing.css";
-
+import { Link } from "react-router-dom";
 class Landing extends Component {
   state = {};
   render() {
     return (
       <div class="landingContainer">
-        <button className="landingButton">SIGN IN</button>
+        <Link to="/signin">
+          <button className="landingButton">SIGN IN</button>
+        </Link>
         <br />
-        <button className="landingButton">SIGN UP</button>
+        <Link to="/signup">
+          <button className="landingButton">SIGN UP</button>
+        </Link>
         <br />
-        <button className="landingButton">GUEST</button>
+        <Link to="/dashboard">
+          <button className="landingButton">GUEST</button>
+        </Link>
       </div>
     );
   }

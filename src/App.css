@@ -45,14 +45,10 @@
 }
 
 .header {
-  height: 4em;
-  display: grid;
-  grid-template-columns: 80px 200px 100px 100px;
-  grid-template-rows: auto;
-  gap: 5px;
-  align-items: center;
   font-family: "Raleway";
-  font-size: 1.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  font-size: 3em;
   background-color: maroon;
   margin-left: 1em;
   letter-spacing: 2px;
