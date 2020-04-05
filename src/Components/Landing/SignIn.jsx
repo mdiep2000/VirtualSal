@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form } from "react-bootstrap";
 import "../../App.css";
+import { Link } from "react-router-dom";
 
 class SignIn extends Component {
   constructor(props) {
@@ -45,7 +46,8 @@ class SignIn extends Component {
               this.state.password
           )
       );
-      this.props.signIn();
+      localStorage.setItem("username", username);
+      alert("You are now signed in!");
     }
   };
 
@@ -65,13 +67,14 @@ class SignIn extends Component {
           <Form.Group controlId="password">
             <Form.Control type="text" placeholder="PASSWORD" required />
           </Form.Group>
-          <button
+          <Link
+            to="/dashboard"
             className="landingButton"
             type="button"
             onClick={this.handleSubmit}
           >
             SIGN IN
-          </button>
+          </Link>
         </Form>
       </div>
     );

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Landing from "./Landing/Landing.jsx";
 import SignIn from "./Landing/SignIn.jsx";
 import SignUp from "./Landing/SignUp.jsx";
+import UploadSchedule from "./Landing/UploadSchedule.jsx";
 import Dashboard from "./Dashboard/Dashboard.jsx";
 import Navbar from "./Navbar.jsx";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -9,16 +10,12 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 class VirtualSal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      signedIn: false,
-    };
+    this.state = {};
   }
 
-  handleSignIn = () => {
-    alert("You are now signed in!");
-    this.setState({ signedIn: true });
-    window.location.assign("http://localhost:3000/dashboard");
-  };
+  // handleSignIn = (username) => {
+  //   //window.location.assign("http://localhost:3000/dashboard");
+  // };
 
   render() {
     return (
@@ -30,10 +27,13 @@ class VirtualSal extends Component {
               <Landing />
             </Route>
             <Route path="/signin">
-              <SignIn signIn={this.handleSignIn} />
+              <SignIn />
             </Route>
             <Route path="/signup">
-              <SignUp signIn={this.handleSignIn} />
+              <SignUp />
+            </Route>
+            <Route path="/uploadSchedule">
+              <UploadSchedule />
             </Route>
             <Route path="/dashboard">
               <Dashboard />

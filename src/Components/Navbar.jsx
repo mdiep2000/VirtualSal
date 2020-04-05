@@ -6,11 +6,19 @@ class Navbar extends Component {
     super(props);
     this.state = {};
   }
+
+  dependentHome() {
+    if (localStorage.getItem("username")) {
+      return "/dashboard";
+    } else {
+      return "/";
+    }
+  }
   render() {
     return (
       <div className="header">
-        <Link to="/" style={{ color: "white" }}>
-          <h1 className="slogan"></h1>VirtualSal
+        <Link to={this.dependentHome()} style={{ color: "white" }}>
+          VirtualSal
         </Link>
       </div>
     );
