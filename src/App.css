@@ -1,38 +1,98 @@
-.App {
+* {
+  box-sizing: border-box;
+}
+.homeImage {
+  position: relative;
+}
+
+.AppContainer {
+  background-image: radial-gradient(circle, red, maroon, maroon, maroon);
+}
+
+.img {
+  height: 43em;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.img:before {
+  content: "";
+  position: absolute;
+  top: 4em;
+  right: 0;
+  bottom: 4em;
+  left: 0;
+  height: 43em;
+  background-image: linear-gradient(to bottom right, #39333bb7, #180c27ab);
+  opacity: 0.6;
+}
+
+.title {
+  padding: 1em 0.5em;
+  font-size: 3em;
+  color: white;
+  text-align: center;
+  font-family: "Raleway";
+  position: relative;
+}
+
+.paragraph {
+  color: white;
+  font-size: 1.5em;
+  position: relative;
+  padding: 1em 2em;
+  text-align: justify;
+}
+
+.header {
+  height: 4em;
+  display: grid;
+  grid-template-columns: 80px 200px 100px 100px;
+  grid-template-rows: auto;
+  gap: 5px;
+  align-items: center;
+  font-family: "Ubuntu", sans-serif;
+  background-color: maroon;
+  color: azure;
+}
+
+.logo {
+  height: 6.5em;
+  font-size: 10px;
+}
+
+.slogan {
+  font-size: 2em;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.links {
+  text-align: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.submit {
+  width: 12em;
+  font-size: 1.5em;
+  color: azure;
+  background-color: #402f80;
+  position: relative;
+}
+
+.submit:hover,
+.submit:focus {
+  background: #1c0444;
+}
+
+@media (min-width: 992px) {
+  .title {
+    padding: 2em 2em 1em 2em;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+  .paragraph {
+    font-size: 2em;
+    padding: 1em 4em;
   }
 }
