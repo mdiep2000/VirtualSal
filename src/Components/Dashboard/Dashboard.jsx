@@ -1,9 +1,19 @@
 import React, { Component } from "react";
 
 class Dashboard extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  UserDependent() {
+    if (this.props.signedIn == true) {
+      return <h1>DashBoard for SignIn User</h1>;
+    } else {
+      return <h1>DashBoard for Guest</h1>;
+    }
+  }
   render() {
-    return <h1>to be the dashboard</h1>;
+    return this.UserDependent();
   }
 }
 
