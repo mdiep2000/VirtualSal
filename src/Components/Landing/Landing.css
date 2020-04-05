@@ -1,15 +1,7 @@
 .landingContainer {
-  height: 42em;
+  height: 39.5em;
   width: 100%;
   padding-top: 15%;
-}
-
-.navbarBG {
-  background-color: rgb(128, 0, 0);
-}
-
-.navbarText {
-  color: white;
 }
 
 .landingButton {
