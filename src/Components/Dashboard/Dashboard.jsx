@@ -1,22 +1,32 @@
 import React, { Component } from "react";
 import "./Dashboard.css";
+import "./Dashboard.css";
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-  componentDidMount() {
-  }
+  componentDidMount() {}
   UserDependent() {
     const username = localStorage.getItem("username");
     if (username) {
-      return <h1 className="welcomeText">Welcome, {username}</h1>;
+      return <h1 className="welcomeText">WELCOME, {username}</h1>;
     } else {
-      return <h1 className="welcomeText">Welcome, Guest</h1>;
+      return <h1 className="welcomeText">WELCOME, Guest</h1>;
     }
   }
   render() {
-    return this.UserDependent();
+    return (
+      <div className="dashboardContainer">
+        <div className="welcomeContainer">{this.UserDependent()}</div>
+        <label>
+          My Classes{" "}
+          <div className="welcomeContainer">
+            <h1>Classes go here</h1>
+          </div>
+        </label>
+      </div>
+    );
   }
 }
 
