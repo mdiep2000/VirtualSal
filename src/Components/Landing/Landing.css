@@ -19,3 +19,28 @@
   margin-left: 35%;
 }
 
+.formButton {
+  color: white;
+  font-size: 1em;
+  font-family: "Raleway";
+  letter-spacing: 6px;
+  text-align: center;
+  background-color: rgb(78, 5, 5);
+  border-color: rgb(43, 0, 0);
+  border-width: 5%;
+  border-style: solid;
+  width: 80%;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.formContainer-Upload {
+  background-color: rgb(78, 11, 11);
+  position: fixed;
+  min-width: 60%;
+  width: 60%;
+  margin-top: 5%;
+  padding: 2%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
