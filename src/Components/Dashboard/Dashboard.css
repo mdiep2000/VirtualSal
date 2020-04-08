@@ -1,25 +1,96 @@
 .dashboardContainer {
   background-color: white;
   position: fixed;
-  height: 90%;
-  width: 94%;
-  margin-left: 3%;
-  margin-right: 3%;
-  margin-bottom: 3%;
+  height: 85%;
+  width: 96%;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 2%;
+  padding: 1%;
+  display: grid;
+  grid-template-columns: auto auto auto; /*split into 3 columns*/
+  grid-template-rows: 8% auto auto auto auto; /*split into 5 columns*/
 }
 
+/* containers */
+
+.welcomeContainer {
+  grid-area: 1 / 1 / 2 / 2;
+  background-color: rgb(78, 11, 11);
+  width: fit-content;
+  overflow-x: scroll;
+  margin-top: 1%;
+}
+
+.scheduleContainer {
+  grid-area: 2 / 1 / 4 / 3;
+  overflow-y: scroll;
+  background-color: rgb(78, 11, 11);
+  margin-top: 1%;
+}
+
+.infoContainer {
+  grid-area: 2 / 3 / 3 / 4;
+  background-color: rgb(78, 11, 11);
+  margin-top: 1%;
+  margin-left: 2%;
+  overflow-y: scroll;
+}
+
+.questionsContainer {
+  grid-area: 4 / 1 / 6 / 3;
+  overflow-y: scroll;
+  background-color: rgb(78, 11, 11);
+  margin-top: 1%;
+  max-height: min-content;
+}
+
+.forumsContainer {
+  grid-area: 3 / 3 / 5 / 4;
+  background-color: rgb(78, 11, 11);
+  margin-top: 1%;
+  margin-left: 2%;
+  overflow-y: scroll;
+}
+
+.chatContainer {
+  grid-area: 5 / 3 / 6 / 4;
+  background-color: rgb(78, 11, 11);
+  margin-top: 1%;
+  margin-left: 2%;
+  overflow-y: scroll;
+}
+
+/* text */
+
+.moduleTitleLeft {
+  color: rgb(37, 37, 37);
+  background-color: white;
+  width: 52.1%;
+  position: fixed;
+}
+
+.moduleTitleRight {
+  color: rgb(37, 37, 37);
+  background-color: white;
+  width: 42%;
+  position: fixed;
+}
 .welcomeText {
   font-family: "Raleway";
   letter-spacing: 2px;
   color: azure;
   font-size: 2em;
-  margin-left: 1em;
-  margin-right: 1em;
 }
-.welcomeContainer {
-  background-color: rgb(78, 11, 11);
-  position: relative;
-  width: fit-content;
-  margin-top: 1%;
-  margin-left: 2%;
+
+.scheduleHeader {
+  color: white;
+  font-family: "Raleway";
+  font-size: 1em;
+}
+.scheduleText {
+  color: white;
+  font-family: "Raleway";
+  font-size: 1em;
+  margin-left: 5%;
 }
