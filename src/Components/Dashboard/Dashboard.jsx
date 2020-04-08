@@ -16,8 +16,8 @@ class Dashboard extends Component {
     return (
       <div className="dashboardContainer">
         <div className="welcomeContainer">
-          {localStorage.getItem("username") === "" ? (
-            <h1 className="welcomeText">WELCOME, Guest</h1>
+          {localStorage.getItem("username") === null ? (
+            <h1 className="welcomeText">WELCOME, GUEST</h1>
           ) : (
             <h1 className="welcomeText">
               WELCOME, {localStorage.getItem("username")}

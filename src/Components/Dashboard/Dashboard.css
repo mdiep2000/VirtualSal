@@ -9,7 +9,7 @@
   padding: 1%;
   display: grid;
   grid-template-columns: auto auto auto; /*split into 3 columns*/
-  grid-template-rows: 8% 3% auto 3% auto 3% auto 3% auto; /*split into 8 columns*/
+  grid-template-rows: 8% 4% auto 4% auto 4% auto 4% auto; /*split into 8 columns*/
 }
 
 /* containers */
@@ -30,7 +30,8 @@
   grid-area: 3 / 1 / 6 / 3;
   overflow-y: scroll;
   background-color: rgb(78, 11, 11);
-  margin-top: 1%;
+  margin-right: 2%;
+  padding: 3%;
 }
 
 .infoTitleContainer {
@@ -39,8 +40,6 @@
 .infoContainer {
   grid-area: 3 / 3 / 4 / 4;
   background-color: rgb(78, 11, 11);
-  margin-top: 1%;
-  margin-left: 2%;
   overflow-y: scroll;
 }
 
@@ -51,8 +50,8 @@
   grid-area: 7 / 1 / 10 / 3;
   overflow-y: scroll;
   background-color: rgb(78, 11, 11);
-  margin-top: 1%;
-  max-height: min-content;
+  margin-right: 2%;
+  padding: 3%;
 }
 
 .forumsTitleContainer {
@@ -62,8 +61,6 @@
 .forumsContainer {
   grid-area: 5 / 3 / 8 / 4;
   background-color: rgb(78, 11, 11);
-  margin-top: 1%;
-  margin-left: 2%;
   overflow-y: scroll;
 }
 
@@ -75,7 +72,6 @@
   grid-area: 9 / 3 / 10 / 4;
   background-color: rgb(78, 11, 11);
   margin-top: 1%;
-  margin-left: 2%;
   overflow-y: scroll;
 }
 

@@ -82,7 +82,7 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div className="formContainer">
+      <div className="formContainer-SignUp">
         <h1 className="formTitle">WELCOME</h1>
         <h2 className="formSubtitle">PLEASE FILL OUT THE INFO TO SIGN UP</h2>
         <br />

@@ -12,27 +12,6 @@
   background-size: cover;
 }
 
-.img {
-  height: 43em;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
-.img:before {
-  content: "";
-  position: absolute;
-  top: 4em;
-  right: 0;
-  bottom: 4em;
-  left: 0;
-  height: 43em;
-  background-image: linear-gradient(to bottom right, #39333bb7, #180c27ab);
-  opacity: 0.6;
-}
-
 .title {
   padding: 1em 0.5em;
   font-size: 3em;
@@ -40,14 +19,6 @@
   text-align: center;
   font-family: "Raleway";
   position: relative;
-}
-
-.paragraph {
-  color: white;
-  font-size: 1.5em;
-  position: relative;
-  padding: 1em 2em;
-  text-align: justify;
 }
 
 .header {
@@ -68,15 +39,6 @@
 .slogan {
   font-size: 2em;
   text-align: center;
-}
-
-.links {
-  text-align: center;
-}
-
-.paragraph {
-  font-size: 2em;
-  padding: 1em 4em;
 }
 
 .formContainer {
