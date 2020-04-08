@@ -9,7 +9,7 @@
   padding: 1%;
   display: grid;
   grid-template-columns: auto auto auto; /*split into 3 columns*/
-  grid-template-rows: 8% auto auto auto auto; /*split into 5 columns*/
+  grid-template-rows: 8% 3% auto 3% auto 3% auto 3% auto; /*split into 8 columns*/
 }
 
 /* containers */
@@ -22,39 +22,57 @@
   margin-top: 1%;
 }
 
+.scheduleTitleContainer {
+  grid-area: 2 / 1 / 3 / 3;
+}
+
 .scheduleContainer {
-  grid-area: 2 / 1 / 4 / 3;
+  grid-area: 3 / 1 / 6 / 3;
   overflow-y: scroll;
   background-color: rgb(78, 11, 11);
   margin-top: 1%;
 }
 
-.infoContainer {
+.infoTitleContainer {
   grid-area: 2 / 3 / 3 / 4;
+}
+.infoContainer {
+  grid-area: 3 / 3 / 4 / 4;
   background-color: rgb(78, 11, 11);
   margin-top: 1%;
   margin-left: 2%;
   overflow-y: scroll;
 }
 
+.questionsTitleContainer {
+  grid-area: 6 / 1 / 9 / 3;
+}
 .questionsContainer {
-  grid-area: 4 / 1 / 6 / 3;
+  grid-area: 7 / 1 / 10 / 3;
   overflow-y: scroll;
   background-color: rgb(78, 11, 11);
   margin-top: 1%;
   max-height: min-content;
 }
 
+.forumsTitleContainer {
+  grid-area: 4 / 3 / 5 / 4;
+}
+
 .forumsContainer {
-  grid-area: 3 / 3 / 5 / 4;
+  grid-area: 5 / 3 / 8 / 4;
   background-color: rgb(78, 11, 11);
   margin-top: 1%;
   margin-left: 2%;
   overflow-y: scroll;
 }
 
+.chatTitleContainer {
+  grid-area: 8 / 3 / 9 / 4;
+}
+
 .chatContainer {
-  grid-area: 5 / 3 / 6 / 4;
+  grid-area: 9 / 3 / 10 / 4;
   background-color: rgb(78, 11, 11);
   margin-top: 1%;
   margin-left: 2%;
@@ -63,19 +81,11 @@
 
 /* text */
 
-.moduleTitleLeft {
+.moduleTitle {
   color: rgb(37, 37, 37);
-  background-color: white;
-  width: 52.1%;
-  position: fixed;
+  font-family: "Raleway";
 }
 
-.moduleTitleRight {
-  color: rgb(37, 37, 37);
-  background-color: white;
-  width: 42%;
-  position: fixed;
-}
 .welcomeText {
   font-family: "Raleway";
   letter-spacing: 2px;
