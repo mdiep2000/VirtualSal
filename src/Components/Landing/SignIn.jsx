@@ -65,7 +65,7 @@ class SignIn extends Component {
             </Form.Text> */}
           </Form.Group>
           <Form.Group controlId="password">
-            <Form.Control type="password" placeholder="PASSWORD" required />
+            <Form.Control type="password" placeholder="PASSWORD" required  />
           </Form.Group>
           <Link
             to="/dashboard"
