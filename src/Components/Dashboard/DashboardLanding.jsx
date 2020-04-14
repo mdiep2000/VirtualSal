@@ -4,25 +4,37 @@ import Dashboard from "./Dashboard";
 import GuestDashboard from "./GuestDashboard";
 import Questions from "./Questions";
 import Forums from "./Forums";
+import SearchResults from "./SearchResults";
 
 class DashboardLanding extends Component {
-  state = {};
+  state = {
+    searchKey: "",
+  };
+
+  handleSearch = (searchKey) => {
+    console.log(searchKey);
+    this.setState({ searchKey: searchKey });
+  };
+
   render() {
     return (
       <Router>
         <Switch>
           <Route exact path="/dashboard">
             {localStorage.getItem("username") === null ? (
-              <GuestDashboard />
+              <GuestDashboard onSearch={this.handleSearch} />
             ) : (
-              <Dashboard />
+              <Dashboard onSearch={this.handleSearch} />
             )}
           </Route>
-          <Route path="/questions">
+          <Route path="/dashboard/questions">
             <Questions />
           </Route>
-          <Route path="/forums">
+          <Route path="/dashboard/forums">
             <Forums />
+          </Route>
+          <Route path="/dashboard/search-results">
+            <SearchResults searchKey={this.state.searchKey} />
           </Route>
         </Switch>
       </Router>

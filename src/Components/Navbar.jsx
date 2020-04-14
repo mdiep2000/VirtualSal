@@ -17,7 +17,11 @@ class Navbar extends Component {
   render() {
     return (
       <div className="header">
-        <Link to={this.dependentHome()} style={{ color: "white" }}>
+        <Link
+          to={this.dependentHome()}
+          className="header"
+          style={{ color: "white" }}
+        >
           VirtualSal
         </Link>
       </div>

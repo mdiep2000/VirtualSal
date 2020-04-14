@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "./Dashboard.css";
 import "./Dashboard.css";
 import Schedule from "./Schedule.jsx";
@@ -10,6 +10,13 @@ import { Link } from "react-router-dom";
 class Dashboard extends Component {
   state = {};
 
+  handleInput = () => {
+    const searchKey = document.getElementById("userDashboardSearch");
+    if (searchKey !== null) {
+      this.props.onSearch(searchKey.value);
+    }
+  };
+
   render() {
     return (
       <div class="dashboardContainer">
@@ -18,6 +25,18 @@ class Dashboard extends Component {
             WELCOME, {localStorage.getItem("username")}
           </h1>
         </div>
+        <div className="userSearchBarContainer">
+          <input
+            className="userSearchBar"
+            id="userDashboardSearch"
+            type="text"
+            placeholder="SEARCH FOR A QUESTION, A FORUM, OR A CLASS"
+            onInput={this.handleInput}
+          ></input>
+          <Link to="/dashboard/search-results">
+            <button className="userSearchButton">search</button>
+          </Link>
+        </div>
         <div className="scheduleTitleContainer">
           <label className="moduleTitle">My Classes</label>
         </div>
@@ -25,11 +44,11 @@ class Dashboard extends Component {
           <Schedule />
         </div>
         <div className="infoTitleContainer">
-            <label className="moduleTitle">My Reviews</label>
+          <label className="moduleTitle">My Reviews</label>
         </div>
         <div className="infoContainer">
-          <Link to ="/info">
-            <button className = "reviewText">Review Courses</button>
+          <Link to="/info">
+            <button className="reviewText">Review Courses</button>
           </Link>
         </div>
         <div className="forumsTitleContainer">
@@ -44,12 +63,12 @@ class Dashboard extends Component {
         <div className="questionsContainer">
           <Questions />
         </div>
-        <div className="chatTitleContainer">
+        {/* <div className="chatTitleContainer">
           <label className="moduleTitle">My Chat</label>
         </div>
         <div className="chatContainer">
           <Chat />
-        </div>
+        </div> */}
       </div>
     );
   }

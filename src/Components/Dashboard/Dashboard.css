@@ -18,11 +18,19 @@
 
 /* containers */
 
-.searchBarContainer {
+.guestSearchBarContainer {
   border-style: solid;
   max-width: 100%;
   border-color: rgb(83, 0, 0);
 }
+
+.userSearchBarContainer {
+  grid-area: 1 / 2 / 2 / 4;
+  border-style: solid;
+  max-width: 100%;
+  border-color: rgb(83, 0, 0);
+}
+
 .welcomeContainer {
   grid-area: 1 / 1 / 2 / 2;
   background-color: rgb(78, 11, 11);
@@ -68,7 +76,7 @@
 }
 
 .forumsContainer {
-  grid-area: 5 / 3 / 8 / 4;
+  grid-area: 5 / 3 / 10 / 4;
   background-color: rgb(78, 11, 11);
   overflow-y: scroll;
 }
@@ -114,5 +122,64 @@
   color: white;
   font-family: "Raleway";
   font-size: 1em;
-  background-color: rgb(78, 11, 11) ;
+  background-color: rgb(78, 11, 11);
+}
+
+.guestSearchBar {
+  border-style: solid;
+  width: 90%;
+  border-color: rgb(83, 0, 0);
+  height: 4em;
+}
+
+.userSearchBar {
+  border-style: solid;
+  width: 90%;
+  border-color: rgb(83, 0, 0);
+  height: 3em;
+}
+
+.guestSearchButton {
+  width: 10%;
+  height: 4em;
+  float: right;
+  background-color: rgb(78, 5, 5);
+  color: white;
+  overflow-x: hidden;
+}
+
+.userSearchButton {
+  text-align: start;
+  font-size: 0.4em;
+  width: 10%;
+  height: 7em;
+  float: right;
+  background-color: rgb(78, 5, 5);
+  color: white;
+  overflow-x: hidden;
+}
+
+.guestHeader {
+  text-align: center;
+  color: white;
+  font-family: "Raleway";
+  font-size: 3em;
+  letter-spacing: 0.2em;
+  font-weight: 1000;
+}
+
+.questionButton {
+  color: white;
+  font-size: 1em;
+  font-family: "Raleway";
+  text-align: center;
+  background-color: rgb(78, 5, 5);
+  border-color: rgb(43, 0, 0);
+  border-width: 5%;
+  border-style: solid;
+  width: 20%;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  margin: 2% 40% 0% 40%;
+  overflow-x: hidden;
 }
