@@ -31,7 +31,6 @@ class Dashboard extends Component {
           <Link to ="/info">
             <button className = "reviewText">Review Courses</button>
           </Link>
-          <Info />
         </div>
         <div className="forumsTitleContainer">
           <label className="moduleTitle">My Forums</label>

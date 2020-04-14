@@ -33,3 +33,20 @@
 .submit {
     margin-left: 4%;
 }
+
+#form{
+    margin-left: 2%;
+}
+
+.formContainer{
+    grid-template-columns: auto auto; /*split into 2 columns*/
+    position: fixed;
+    margin-top: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+
+.nonComment{
+    grid-area: 1 / 1 / 1 / 1;
+}
