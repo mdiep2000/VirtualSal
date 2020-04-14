@@ -4,8 +4,6 @@ import "./Dashboard.css";
 import Schedule from "./Schedule.jsx";
 import Info from "./Info.jsx";
 import Forums from "./Forums.jsx";
-import Questions from "./Questions.jsx";
-import Chat from "./Chat.jsx";
 import { Link } from "react-router-dom";
 class Dashboard extends Component {
   state = {};
@@ -58,12 +56,12 @@ class Dashboard extends Component {
         <div className="forumsContainer">
           <Forums />
         </div>
-        <div className="questionsTitleContainer">
+        {/* <div className="questionsTitleContainer">
           <label className="moduleTitle">My Questions </label>
         </div>
         <div className="questionsContainer">
           <Questions />
-        </div>
+        </div> */}
         {/* <div className="chatTitleContainer">
           <label className="moduleTitle">My Chat</label>
         </div>

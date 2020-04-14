@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import GuestDashboard from "./GuestDashboard";
-import Questions from "./Questions";
 import Forums from "./Forums";
 import SearchResults from "./SearchResults";
 
@@ -26,9 +25,6 @@ class DashboardLanding extends Component {
             ) : (
               <Dashboard onSearch={this.handleSearch} />
             )}
-          </Route>
-          <Route path="/dashboard/questions">
-            <Questions />
           </Route>
           <Route path="/dashboard/forums">
             <Forums />
