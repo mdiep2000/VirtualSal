@@ -4,9 +4,18 @@ import React, { Component } from "react";
 You can display these however you want, but I assume theyll have name and link to page*/
 
 class SearchResults extends Component {
-  state = {};
+  componentDidMount = () => {
+    //called once page renders
+    /*process the search key here (this.props.searchKey) and grab
+    other needed information from backend*/
+  };
   render() {
-    return <h1>SearchResults</h1>;
+    return (
+      <div>
+        <h1>Search Results</h1>
+        <h1>{this.props.searchKey}</h1>
+      </div>
+    );
   }
 }
 

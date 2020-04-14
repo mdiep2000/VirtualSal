@@ -1,9 +1,8 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./Dashboard.css";
 class GuestDashboard extends Component {
-  state = {};
-
-  handleSubmit = () => {
+  handleInput = () => {
     const searchKey = document.getElementById("guestDashboardSearch");
     if (searchKey !== null) {
       this.props.onSearch(searchKey.value);
@@ -20,18 +19,15 @@ class GuestDashboard extends Component {
             id="guestDashboardSearch"
             type="text"
             placeholder="SEARCH FOR A QUESTION, A FORUM, OR A CLASS"
+            onInput={this.handleInput}
           ></input>
-          <button
-            className="searchButton"
-            onClick={this.handleSubmit}
-            to="/search"
-          >
-            search
-          </button>
+          <Link to="/dashboard/search-results">
+            <button className="searchButton">search</button>
+          </Link>
         </div>
-        <button className="questionButton" to="/questions">
-          + Ask Question
-        </button>
+        <Link to="/dashboard/questions">
+          <button className="questionButton">+ Ask Question</button>
+        </Link>
       </div>
     );
   }

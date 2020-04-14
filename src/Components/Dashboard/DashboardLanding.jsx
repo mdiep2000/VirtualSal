@@ -27,13 +27,13 @@ class DashboardLanding extends Component {
               <Dashboard />
             )}
           </Route>
-          <Route path="/questions">
+          <Route path="/dashboard/questions">
             <Questions />
           </Route>
-          <Route path="/forums">
+          <Route path="/dashboard/forums">
             <Forums />
           </Route>
-          <Route path="/searchResults">
+          <Route path="/dashboard/search-results">
             <SearchResults searchKey={this.state.searchKey} />
           </Route>
         </Switch>
