@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "./Dashboard.css";
 import "./Dashboard.css";
 import Schedule from "./Schedule.jsx";
@@ -7,22 +7,15 @@ import Forums from "./Forums.jsx";
 import Questions from "./Questions.jsx";
 import Chat from "./Chat.jsx";
 class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  state = {};
 
   render() {
     return (
-      <div className="dashboardContainer">
+      <div class="dashboardContainer">
         <div className="welcomeContainer">
-          {localStorage.getItem("username") === null ? (
-            <h1 className="welcomeText">WELCOME, GUEST</h1>
-          ) : (
-            <h1 className="welcomeText">
-              WELCOME, {localStorage.getItem("username")}
-            </h1>
-          )}
+          <h1 className="welcomeText">
+            WELCOME, {localStorage.getItem("username")}
+          </h1>
         </div>
         <div className="scheduleTitleContainer">
           <label className="moduleTitle">My Classes</label>

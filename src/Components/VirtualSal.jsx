@@ -3,7 +3,7 @@ import Landing from "./Landing/Landing.jsx";
 import SignIn from "./Landing/SignIn.jsx";
 import SignUp from "./Landing/SignUp.jsx";
 import UploadSchedule from "./Landing/UploadSchedule.jsx";
-import Dashboard from "./Dashboard/Dashboard.jsx";
+import DashboardLanding from "./Dashboard/DashboardLanding.jsx";
 import Navbar from "./Navbar.jsx";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -36,7 +36,7 @@ class VirtualSal extends Component {
               <UploadSchedule />
             </Route>
             <Route path="/dashboard">
-              <Dashboard />
+              <DashboardLanding />
             </Route>
           </Switch>
         </div>
