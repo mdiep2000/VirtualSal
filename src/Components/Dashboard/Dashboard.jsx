@@ -6,6 +6,7 @@ import Info from "./Info.jsx";
 import Forums from "./Forums.jsx";
 import Questions from "./Questions.jsx";
 import Chat from "./Chat.jsx";
+import { Link } from "react-router-dom";
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -31,9 +32,12 @@ class Dashboard extends Component {
           <Schedule />
         </div>
         <div className="infoTitleContainer">
-          <label className="moduleTitle">My Info</label>
+            <label className="moduleTitle">My Reviews</label>
         </div>
         <div className="infoContainer">
+          <Link to ="/info">
+            <button className = "reviewText">Review Courses</button>
+          </Link>
           <Info />
         </div>
         <div className="forumsTitleContainer">

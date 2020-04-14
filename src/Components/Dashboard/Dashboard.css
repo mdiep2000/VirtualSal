@@ -100,3 +100,10 @@
   font-size: 1em;
   margin-left: 5%;
 }
+
+.reviewText {
+  color: white;
+  font-family: "Raleway";
+  font-size: 1em;
+  background-color: rgb(78, 11, 11) ;
+}
