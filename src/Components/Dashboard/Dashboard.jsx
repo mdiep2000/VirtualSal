@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "./Dashboard.css";
 import "./Dashboard.css";
 import Schedule from "./Schedule.jsx";
@@ -25,11 +25,11 @@ class Dashboard extends Component {
           <Schedule />
         </div>
         <div className="infoTitleContainer">
-            <label className="moduleTitle">My Reviews</label>
+          <label className="moduleTitle">My Reviews</label>
         </div>
         <div className="infoContainer">
-          <Link to ="/info">
-            <button className = "reviewText">Review Courses</button>
+          <Link to="/info">
+            <button className="reviewText">Review Courses</button>
           </Link>
           <Info />
         </div>
