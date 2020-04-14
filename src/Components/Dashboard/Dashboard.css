@@ -12,8 +12,17 @@
   grid-template-rows: 8% 4% auto 4% auto 4% auto 4% auto; /*split into 8 columns*/
 }
 
+.guestDashboardContainer {
+  margin: 15% 20% 35% 20%;
+}
+
 /* containers */
 
+.searchBarContainer {
+  border-style: solid;
+  max-width: 100%;
+  border-color: rgb(83, 0, 0);
+}
 .welcomeContainer {
   grid-area: 1 / 1 / 2 / 2;
   background-color: rgb(78, 11, 11);

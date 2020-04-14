@@ -29,9 +29,6 @@ class Info extends Component {
     return (
     <div>
       <h1 class = "header">Create a Review</h1>
-      <div className="submit">
-      <input type="submit" value="Submit" />
-      </div>
       <br />
       <form onSubmit ={this.handleSubmit}>
       <div className = "course">
@@ -78,8 +75,11 @@ class Info extends Component {
       <textarea type = "text" name="comment" value ={this.state.comment} placeholder="comment" class = "form-control" onChange={e=>this.change(e)} />
       </div>
       <br />
-
+      <div className="submit">
+      <input type="submit" value="Submit" />
+      </div>
       </form>
+      
 
     </div>
     )
