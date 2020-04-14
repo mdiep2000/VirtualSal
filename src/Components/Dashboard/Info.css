@@ -1,0 +1,44 @@
+.header {
+    color: white;
+    font-size: 1.4em;
+    font-family: "Raleway";
+    text-align: justify;
+    margin-top: 20px;
+}
+
+.course {
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.professor {
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.workload {
+    margin-top: 19px;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.clarity {
+    margin-top: 19px;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.clarification{
+    font-family: "Raleway";
+    color: white;
+    font-size: .73em;
+}
+
+
+.commentBox {
+    margin-left: 14px;
+}
+
+.submit {
+    margin-left: 10px;
+}
