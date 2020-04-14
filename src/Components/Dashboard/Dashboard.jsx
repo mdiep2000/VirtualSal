@@ -10,6 +10,13 @@ import { Link } from "react-router-dom";
 class Dashboard extends Component {
   state = {};
 
+  handleInput = () => {
+    const searchKey = document.getElementById("userDashboardSearch");
+    if (searchKey !== null) {
+      this.props.onSearch(searchKey.value);
+    }
+  };
+
   render() {
     return (
       <div class="dashboardContainer">
@@ -17,6 +24,18 @@ class Dashboard extends Component {
           <h1 className="welcomeText">
             WELCOME, {localStorage.getItem("username")}
           </h1>
+        </div>
+        <div className="userSearchBarContainer">
+          <input
+            className="userSearchBar"
+            id="userDashboardSearch"
+            type="text"
+            placeholder="SEARCH FOR A QUESTION, A FORUM, OR A CLASS"
+            onInput={this.handleInput}
+          ></input>
+          <Link to="/dashboard/search-results">
+            <button className="userSearchButton">search</button>
+          </Link>
         </div>
         <div className="scheduleTitleContainer">
           <label className="moduleTitle">My Classes</label>
@@ -45,12 +64,12 @@ class Dashboard extends Component {
         <div className="questionsContainer">
           <Questions />
         </div>
-        <div className="chatTitleContainer">
+        {/* <div className="chatTitleContainer">
           <label className="moduleTitle">My Chat</label>
         </div>
         <div className="chatContainer">
           <Chat />
-        </div>
+        </div> */}
       </div>
     );
   }

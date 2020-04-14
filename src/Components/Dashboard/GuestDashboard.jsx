@@ -13,16 +13,16 @@ class GuestDashboard extends Component {
       <div className="guestDashboardContainer">
         <h1 className="guestHeader">VirtualSal</h1>
         <br />
-        <div className="searchBarContainer">
+        <div className="guestSearchBarContainer">
           <input
-            className="searchBar"
+            className="guestSearchBar"
             id="guestDashboardSearch"
             type="text"
             placeholder="SEARCH FOR A QUESTION, A FORUM, OR A CLASS"
             onInput={this.handleInput}
           ></input>
           <Link to="/dashboard/search-results">
-            <button className="searchButton">search</button>
+            <button className="guestSearchButton">search</button>
           </Link>
         </div>
         <Link to="/dashboard/questions">

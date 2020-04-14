@@ -24,7 +24,7 @@ class DashboardLanding extends Component {
             {localStorage.getItem("username") === null ? (
               <GuestDashboard onSearch={this.handleSearch} />
             ) : (
-              <Dashboard />
+              <Dashboard onSearch={this.handleSearch} />
             )}
           </Route>
           <Route path="/dashboard/questions">
