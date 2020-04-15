@@ -5,6 +5,7 @@ import Schedule from "./Schedule.jsx";
 import Info from "./Info.jsx";
 import Forums from "./Forums.jsx";
 import { Link } from "react-router-dom";
+import Review from "./Review";
 class Dashboard extends Component {
   state = {};
 
@@ -41,13 +42,22 @@ class Dashboard extends Component {
         <div className="scheduleContainer">
           <Schedule />
         </div>
-        <div className="infoTitleContainer">
+        <div className="reviewTitleContainer">
           <label className="moduleTitle">My Reviews</label>
         </div>
-        <div className="infoContainer">
-          <Link to="/info">
+        <div className="reviewContainer">
+          <Link to="/review">
             <button className="reviewText">Review Courses</button>
           </Link>
+          <Review />
+        </div>
+        <div className="reviewTitleContainer">
+          <label className="moduleTitle">My Reviews</label>
+        </div>
+        <div className="infoTitleContainer">
+          <label className="moduleTitle">My Info</label>
+        </div>
+        <div className="infoContainer">
           <Info />
         </div>
         <div className="forumsTitleContainer">
