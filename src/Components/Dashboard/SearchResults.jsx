@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Forums from "./Forums";
 import Course from "./Course";
 import Review from "./Review";
+import "./Search.css";
+
 /*Ahmed, I'm gonna pass the search key in as a prop, so once this page renders we can query backend which will return list of results.
 You can display these however you want, but I assume theyll have name and link to page*/
 
@@ -99,58 +101,74 @@ class SearchResults extends Component {
   };
 
   render() {
-    var searchLinks = this.state.resultsList.map((result) => (
+    const searchLinks = this.state.resultsList.map((result) => (
       <div>
+        <hr />
         <Link key={result.id} to={result.type + "-id=" + result.id.toString()}>
           {result.type + ": " + result.id.toString()}
         </Link>
-        <br />
+        <hr />
       </div>
     ));
-    var searchPaths = null;
-    for (var i = 0; i < this.state.resultsList.length; i++) {
-      var result = this.state.resultsList[i];
-      console.log("iteration: " + i.toString());
-      console.log("result: ");
-      console.log(result);
-      var path = null;
+    const searchPaths = this.state.resultsList.map((result) => {
       if (result.type === "forum") {
-        path = (
+        return (
           <Route path={"forum-id=" + result.id.toString()}>
             <Forums key={result.id} forums={result.data} />
           </Route>
         );
       } else if (result.type === "course") {
-        path = (
+        console.log("mapping a course route!");
+        return (
           <Route path={"course-id=" + result.id.toString()}>
-            <Course key={result.id} course={result.data} />
+            <h1>put course here</h1>
+            {/* <Course
+              key={result.id}
+              semester={result.semester}
+              year={result.year}
+              courseName={result.courseName}
+              professor={result.professor}
+              sectionNumber={result.sectionNumber}
+            /> */}
           </Route>
         );
       } else if (result.type === "review") {
-        path = (
+        return (
           <Route path={"review-id=" + result.id.toString()}>
             <Review key={result.id} review={result.data} />
           </Route>
         );
+      } else {
+        return;
       }
-      console.log("path:");
-      console.log(path);
-      searchPaths += path;
-    }
+    });
+    // for (var i = 0; i < this.state.resultsList.length; i++) {
+    //   var result = this.state.resultsList[i];
+    //   console.log("iteration: " + i.toString());
+    //   console.log("result: ");
+    //   console.log(result);
+    //   var path = null;
+
+    //   console.log("path:");
+    //   console.log(path);
+    //   searchPaths += path;
+    // }
     console.log("searchLinks");
     console.log(searchLinks);
     console.log("searchPaths");
     console.log(searchPaths);
     return (
-      <div>
-        <h1>Search Results</h1>
-        {/* {searchResults} */}
-        <h1>{this.props.searchKey}</h1>
-        <Router>
-          {searchLinks}
-          <Switch>{searchPaths}</Switch>
-        </Router>
-      </div>
+      <Router>
+        <Switch>
+          <Route path="/dashboard/search-results">
+            <h1>Search Results</h1>
+            {/* {searchResults} */}
+            <h1>{this.props.searchKey}</h1>
+            {searchLinks}
+          </Route>
+          {searchPaths}
+        </Switch>
+      </Router>
     );
   }
 }
