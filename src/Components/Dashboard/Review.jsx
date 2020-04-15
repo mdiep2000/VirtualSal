@@ -35,7 +35,7 @@ class Review extends Component {
   render() {
     return (
       <div>
-        <h1 class="header">Create a Review</h1>
+        <h1 className="header">Create a Review</h1>
         <br />
         <form onSubmit={this.handleSubmit}>
           <div className="course">

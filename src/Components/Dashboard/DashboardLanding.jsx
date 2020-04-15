@@ -11,7 +11,6 @@ class DashboardLanding extends Component {
   };
 
   handleSearch = (searchKey) => {
-    console.log(searchKey);
     this.setState({ searchKey: searchKey });
   };
 
