@@ -1,0 +1,21 @@
+.searchResultsLink {
+  font-size: 1em;
+  text-decoration: none;
+  color: white;
+}
+
+.searchResultsContainer {
+  margin: 5% 10% 0% 10%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.searchResultsTitle {
+  color: white;
+  font-family: "Raleway";
+}
+
+.searchResultsSearchKey {
+  color: black;
+  font-size: 1em;
+}

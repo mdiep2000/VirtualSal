@@ -60,10 +60,10 @@
   overflow-y: scroll;
 }
 
-.questionsTitleContainer {
+.reviewTitleContainer {
   grid-area: 6 / 1 / 9 / 3;
 }
-.questionsContainer {
+.reviewContainer {
   grid-area: 7 / 1 / 10 / 3;
   overflow-y: scroll;
   background-color: rgb(78, 11, 11);
