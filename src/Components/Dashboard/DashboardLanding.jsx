@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import GuestDashboard from "./GuestDashboard";
 import Forums from "./Forums";
-import SearchResults from "./SearchResults";
+import SearchResults from "../Search/SearchResults";
 
 class DashboardLanding extends Component {
   state = {
