@@ -22,6 +22,12 @@ var exampleList = [
           upvotes: 3,
           downvotes: 2,
         },
+
+        {
+          comment: "test",
+          upvotes: 0,
+          downvotes: 3,
+        },
       ],
     },
   },
