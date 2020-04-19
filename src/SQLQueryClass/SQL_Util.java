@@ -1,28 +1,31 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SQL_Util {
-	
-	//SET YOUR WORKBENCH LOGIN
+
+	// SET YOUR WORKBENCH LOGIN
 	static String pass = "root";
 	static String userName = "root";
-	public static final String CREDENTIALS_STRING = "jdbc:mysql://localhost:3306/FinalProject?user="+userName+"&password="+pass+"&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	public static final String CREDENTIALS_STRING = "jdbc:mysql://localhost:3306/FinalProject?user=" + userName
+			+ "&password=" + pass
+			+ "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	static Connection connection;
-	
-	//must be set when user logins or signup
+
+	// must be set when user logins or signup
 	static int currentUserId = -1;
-	
-	//Establish Connection to database
+
+	// Establish Connection to database
 	public static void initConnection() {
-		
-		//we already made a connection
+
+		// we already made a connection
 		if (connection != null) {
 			System.out.println("[WARN] Connection has already been established");
 			return;
 		}
-		
+
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(CREDENTIALS_STRING);
@@ -30,31 +33,160 @@ public class SQL_Util {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void addCourse(String semester, String courseName,String professorName, int sectionNumber, int year) {
-		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("INSERT "
-					+ "	INTO Schedule(userID,semester,courseName,professorName,sectionNumber,year) "
-					+ "VALUES(?,?,?,?,?,?)");
-			
-			preparedStatement.setInt(1,currentUserId);
-			preparedStatement.setString(2, semester);
-			preparedStatement.setString(3, courseName);
-			preparedStatement.setString(4, professorName);
-			preparedStatement.setInt(5, sectionNumber);
-			preparedStatement.setInt(6, year);
 
+	// Add new user - upon sign up
+	public static void addUser(String fName, String lName, String username, String email, String pw) {
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(
+					"INSERT INTO " + "UserRegistry(userID,fName,lName,username,email,pw) " + "VALUES(?,?,?,?,?,?)");
+			preparedStatement.setInt(1, currentUserId);
+			preparedStatement.setString(2, fName);
+			preparedStatement.setString(3, lName);
+			preparedStatement.setString(4, username);
+			preparedStatement.setString(5, email);
+			preparedStatement.setString(6, pw);
+
+			preparedStatement.execute();
+			// Not sure how to exactly return a JSON in a different way - this requires a
+			// jar file to work?
+			// JSONObject jsobject = new JSONObject();
+			// jsobject.put("valid", true);
+			preparedStatement.close();
+
+		} catch (SQLException sqle) {
+			System.out.println("Sqle: " + sqle.getMessage());
+		}
+	}
+
+	// Add course to Schedule Table
+	public static void addCourse(String semester, int term, String courseName, String professorName,
+			int sectionNumber) {
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(
+					"INSERT INTO " + "Schedule(userID,semester,term, courseName ,professorName,sectionNumber) "
+							+ "VALUES(?,?,?,?,?,?)");
+			preparedStatement.setInt(1, currentUserId);
+			preparedStatement.setInt(2, term);
+			preparedStatement.setString(3, semester);
+			preparedStatement.setString(4, courseName);
+			preparedStatement.setString(5, professorName);
+			preparedStatement.setInt(6, sectionNumber);
+
+			preparedStatement.execute();
+			// Not sure how to exactly return a JSON in a different way - this requires a
+			// jar file to work?
+			// JSONObject jsobject = new JSONObject();
+			// jsobject.put("valid", true);
+			preparedStatement.close();
+
+		} catch (SQLException sqle) {
+			System.out.println("Sqle: " + sqle.getMessage());
+		}
+	}
+
+	// Add course if it doesnt exist already - expected CS course list
+	public static void addToCourseRegistry(String courseName, String courseDescription) {
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("INSERT INTO " + "CourseRegistry(courseName, courseDescritp) " + "VALUES(?,?)");
+			preparedStatement.setString(1, courseName);
+			preparedStatement.setString(2, courseDescription);
 
 			preparedStatement.execute();
 			preparedStatement.close();
-			
-		} catch(Exception e) {
-			e.printStackTrace();
+
+		} catch (SQLException sqle) {
+			System.out.println("Sqle: " + sqle.getMessage());
 		}
 	}
-	
-	
 
-	
-	
+	// Add new question/forum
+	public static void addQuestion(String courseName, String questionTitle, String questionBody) {
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(
+					"INSERT INTO " + "Question(creationDate, courseName, posterID, questionTitle, questionBody) "
+							+ "VALUES(CURRENT_TIMESTAMP,?,?,?,?)");
+			preparedStatement.setString(1, courseName);
+			preparedStatement.setInt(2, currentUserId);
+			preparedStatement.setString(3, questionTitle);
+			preparedStatement.setString(4, questionBody);
+
+			preparedStatement.execute();
+			preparedStatement.close();
+
+		} catch (SQLException sqle) {
+			System.out.println("Sqle: " + sqle.getMessage());
+		}
+	}
+
+	// Add an answer to a question - must provide questionID associated with it.
+	public static void addAnswer(int questionID, String answerBody, int upvotes, int downvotes) {
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO "
+					+ "Answer(questionID, userID, answerBody, upvotes, downvotes) " + "VALUES(?,?,?,?,?)");
+
+			preparedStatement.setInt(1, questionID);
+			preparedStatement.setInt(2, currentUserId);
+			preparedStatement.setString(3, answerBody);
+			preparedStatement.setInt(4, upvotes);
+			preparedStatement.setInt(5, downvotes);
+
+			preparedStatement.execute();
+			preparedStatement.close();
+
+		} catch (SQLException sqle) {
+			System.out.println("Sqle: " + sqle.getMessage());
+		}
+	}
+
+	// Add a new review
+	public static void addReview(String courseName, String professor, int workloadVal, int clarity, String comment) {
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(
+					"INSERT INTO " + "Answer(posterID, courseName, professor, workloadVal, clarity, comment) "
+							+ "VALUES(?,?,?,?,?,?)");
+
+			preparedStatement.setInt(1, currentUserId);
+			preparedStatement.setString(2, courseName);
+			preparedStatement.setString(3, professor);
+			preparedStatement.setInt(4, workloadVal);
+			preparedStatement.setInt(45, clarity);
+			preparedStatement.setString(5, comment);
+
+			preparedStatement.execute();
+			preparedStatement.close();
+
+		} catch (SQLException sqle) {
+			System.out.println("Sqle: " + sqle.getMessage());
+		}
+	}
+
+	public static void signInValidation(String username, String pw) {
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("SELECT * FROM " + "UserRegistry WHERE username=? and pw=?");
+
+			preparedStatement.setString(1, username);
+			preparedStatement.setString(2, pw);
+
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				if (username.contentEquals(rs.getString("username"))) {
+					if (pw.contentEquals(rs.getString("pw"))) {
+						// Login Successful - return JSON of user info & store currentUserId
+						currentUserId = rs.getInt("userID");
+					} else {
+						// Incorrect password
+					}
+				} else {
+					// Incorrect login
+				}
+			}
+
+		} catch (SQLException sqle) {
+			System.out.println("Sqle: " + sqle.getMessage());
+		}
+
+	}
+
 }
