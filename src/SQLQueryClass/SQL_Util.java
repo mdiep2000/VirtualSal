@@ -3,11 +3,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SQL_Util {
 
 	// SET YOUR WORKBENCH LOGIN
-	static String pass = "root";
+	static String pass = "cs201student";
 	static String userName = "root";
 	public static final String CREDENTIALS_STRING = "jdbc:mysql://localhost:3306/FinalProject?user=" + userName
 			+ "&password=" + pass
@@ -84,7 +86,8 @@ public class SQL_Util {
 		}
 	}
 
-	// Add course if it doesnt exist already - expected CS course list
+	// Add course if it doesnt exist already - expected CS course list 
+	// NO NEED FOR THIS FUNCTION-WE CAN JUST HARDCODE THE COURSE DETAILS
 	public static void addToCourseRegistry(String courseName, String courseDescription) {
 		try {
 			PreparedStatement preparedStatement = connection
@@ -187,6 +190,61 @@ public class SQL_Util {
 			System.out.println("Sqle: " + sqle.getMessage());
 		}
 
+	}
+	
+	public static boolean courseExists(String courseName) {
+		int courseCount = 0;
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS count FROM CourseRegistry WHERE courseName=?");
+			preparedStatement.setString(1,courseName);
+			
+			//since we are geting information back we need to use result set to capture data
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				courseCount = resultSet.getInt("count");
+				preparedStatement.close();
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if(courseCount>0) return true;
+		return false;
+	}
+	
+	public static Map<String,String> getCourseDetails(String courseName){
+		Map<String, String> courseDetails = new HashMap<>();		
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM CourseRegistry WHERE courseName=?");
+			preparedStatement.setString(1,courseName);
+			
+			//since we are geting information back we need to use result set to capture data
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				String cName = resultSet.getString("courseName");
+				String semester = resultSet.getString("semester");
+				int sectionNumber = resultSet.getInt("sectionNumber");
+				String professorName = resultSet.getString("professorName");
+				
+				courseDetails.put("valid", "true");
+				courseDetails.put("semester", semester);
+				courseDetails.put("sectionNumber", String.valueOf(sectionNumber));
+				courseDetails.put("professorName", professorName);
+				courseDetails.put("courseName", cName);
+				preparedStatement.close();
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return courseDetails;
+		
 	}
 
 }
