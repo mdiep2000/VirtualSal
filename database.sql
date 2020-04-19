@@ -8,7 +8,7 @@ USE FinalProject;
 -- Holds Information about the user info
 CREATE TABLE UserRegistry
 (
-    userID INT(5) PRIMARY KEY NOT NULL IDENTITY(1,1),
+    userID INT(5) PRIMARY KEY NOT NULL auto_increment,
     fName VARCHAR(20) NOT NULL,
     lName VARCHAR(20) NULL,
     username VARCHAR(20) NOT NULL UNIQUE,
@@ -67,17 +67,26 @@ VALUES
 CREATE TABLE CourseRegistry
 (
     courseName VARCHAR(30) NOT NULL,
-    courseDescription VARCHAR(150) NULL
+    courseDescription VARCHAR(150) NULL,
+    semester VARCHAR(6) NOT NULL,
+    term INT(5) NOT NULL,
+    professorName VARCHAR(30) NOT NULL,
+    sectionNumber INT(5) NOT NULL
 );
 
 INSERT INTO CourseRegistry
-    (courseName, courseDescription)
+    (courseName, courseDescription,semester,term,professorName,sectionNumber)
 VALUES
-    ('CSCI 201', 'Principles of Software Development');
+    ('CSCI 201', 'Principles of Software Development','Spring','2020','Miller','12345');
 INSERT INTO CourseRegistry
-    (courseName, courseDescription)
+    (courseName, courseDescription,semester,term,professorName,sectionNumber)
 VALUES
-    ('CSCI 270', 'Introduction to Algorithms & Theory of Computing');
+    ('CSCI 270', 'Introduction to Algorithms & Theory of Computing','Spring','2020','Shamsian','67890');
+    
+
+
+    
+/*
 INSERT INTO CourseRegistry
     (courseName, courseDescription)
 VALUES
@@ -90,7 +99,7 @@ INSERT INTO CourseRegistry
     (courseName, courseDescription)
 VALUES
     ('CSCI 170', 'Discrete Methods in Computer Science');
-
+*/
 
 -- Holds information about a question the user asks
 -- Tied to a specific course by the courseName field
@@ -99,7 +108,7 @@ CREATE TABLE Question
     creationDate DATETIME DEFAULT CURRENT_TIMESTAMP,
     courseName VARCHAR(30) NOT NULL,
     posterID INT(5) NOT NULL,
-    questionID INT(5) PRIMARY KEY IDENTITY(1,1),
+    questionID INT(5) PRIMARY KEY AUTO_INCREMENT,
     questionTitle VARCHAR(50) NOT NULL,
     questionBody VARCHAR(200) NULL,
     FOREIGN KEY (posterID) REFERENCES UserRegistry(userID)
@@ -139,21 +148,22 @@ VALUES
 INSERT INTO Answer
     (questionID, userID, answerBody, upvotes, downvotes)
 VALUES
-    (3, 1, 'example', 1, 3);
+    (2, 1, 'example', 1, 3);
 INSERT INTO Answer
     (questionID, userID, answerBody, upvotes, downvotes)
 VALUES
-    (3, 2, 'example', 3, 1);
+    (2, 2, 'example', 3, 1);
 
 
 
 
---Review posted by the user tied to a specific course by the courseName field
---We could make the courseName reference the CourseRegistry table?
+
+/**Review posted by the user tied to a specific course by the courseName field
+--We could make the courseName reference the CourseRegistry table? **/
 CREATE TABLE Review
 (
     posterID INT(5) NOT NULL,
-    reviewID INT(5) PRIMARY KEY IDENTITY(1,1),
+    reviewID INT(5) PRIMARY KEY AUTO_INCREMENT,
     courseName VARCHAR(100) NOT NULL,
     professor VARCHAR(50) NOT NULL,
     workloadVal INT(5) NOT NULL,
