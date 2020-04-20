@@ -1,27 +1,32 @@
 import React, { Component } from "react";
 import "./Forums.css";
-import SearchResults from "../Search/SearchResults.jsx"
+import SearchResults from "../Search/SearchResults"
 
 class Forums extends Component {
   state = {
     voteYes: false,
     voteNo: false,
-    sthread: this.props.thread
+    sthread: ""
   };
-
 
   setColor = (s) => {
     if (s === "yes") {
       if (!this.state.voteYes) {
-        return "green"
+        return {
+          color: "limegreen"
+        }
       }
     }
     else if (s === "no") {
       if (!this.state.voteNo) {
-        return "red"
+        return {
+          color: "red"
+        }
       }
     }
-    return "Gainsboro"
+    return {
+      color: "Gainsboro"
+    }
   }
 
   voteApprove = (e) => {
@@ -29,12 +34,9 @@ class Forums extends Component {
       //increment approve vote variable
       //decrement disapprove vote variable
     }
-    this.setState({
-      voteYes: true,
-      voteNo: false
-    })
-    this.setColor("yes")
-    this.setColor("no")
+    this.setState(
+     {voteYes: true, voteNo: false}
+    );
     return
   }
 
@@ -43,35 +45,29 @@ class Forums extends Component {
       //increment disapprove vote variable
       //decrement approve vote variable
     }
-    this.setState({
-      voteNo: true,
-      voteYes: false
-    })
-    this.setColor("yes")
-    this.setColor("no")
+    
     return
   }
 
 
   render() {
-    /*
-    const comm = this.state.sthread.map((t)=>{
-      return(
-        <div>
-              <h4>{t.comment}</h4>
-              <p className="voteText"><button onClick={this.voteApprove}><span color={this.setColor("yes")}>Approve</span></button>  <button onClick={this.voteDisapprove}><span color={this.setColor("disapprove")}>Disapprove</span></button></p>
-              <p className="voteText"><span color="green">{t.upvotes} </span>  <span color="red">{t.downvotes}</span></p>
-            </div>
-      );
-    });
-    */
+    console.log(this.props.thread[0].comment);
     return (
       <div>
         <h1 className="questionFormat">{this.props.question}</h1>
         <div className="form-group w-50">
           <label for="comment">Reply:</label>
-          <textarea class="form-control" rows="3" id="comment"></textarea>
+          <textarea className="form-control" rows="3" id="comment"></textarea>
         </div>
+        {this.props.thread.map((t)=>{
+          return(
+            <div className="commentFormat">
+            <h5 className="answerFormat">{t.comment}</h5>
+            <p><span className="numLikes">{t.upvotes}</span>  <span className="numDisLikes">{t.downvotes}</span></p>
+            <p><button onClick={() => this.voteApprove()}><span style={this.setColor("yes")}>Approve</span></button>        <span style={this.setColor("no")}>Disapprove</span> </p>
+            </div>
+          );
+        })}
       </div>
     );
   }

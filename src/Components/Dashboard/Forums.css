@@ -4,3 +4,12 @@
     font-weight: bold;
 }
 
+.numLikes{
+    color: limegreen;
+
+}
+
+
+.numDislikes{
+    color: red;
+}
