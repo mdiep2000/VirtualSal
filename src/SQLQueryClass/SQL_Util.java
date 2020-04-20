@@ -9,7 +9,7 @@ import java.util.Map;
 public class SQL_Util {
 
 	// SET YOUR WORKBENCH LOGIN
-	static String pass = "cs201student";
+	static String pass = "root";
 	static String userName = "root";
 	public static final String CREDENTIALS_STRING = "jdbc:mysql://localhost:3306/FinalProject?user=" + userName
 			+ "&password=" + pass
@@ -61,15 +61,16 @@ public class SQL_Util {
 	}
 
 	// Add course to Schedule Table
-	public static void addCourse(String semester, int term, String courseName, String professorName,
-			int sectionNumber) {
+	//Referenced in AddCourse.java
+	public static void addCourse(String semester, String courseName, String professorName, int sectionNumber,
+			int term) {
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(
 					"INSERT INTO " + "Schedule(userID,semester,term, courseName ,professorName,sectionNumber) "
 							+ "VALUES(?,?,?,?,?,?)");
 			preparedStatement.setInt(1, currentUserId);
-			preparedStatement.setInt(2, term);
-			preparedStatement.setString(3, semester);
+			preparedStatement.setString(2, semester);
+			preparedStatement.setInt(3, term);
 			preparedStatement.setString(4, courseName);
 			preparedStatement.setString(5, professorName);
 			preparedStatement.setInt(6, sectionNumber);
@@ -143,6 +144,7 @@ public class SQL_Util {
 	}
 
 	// Add a new review
+	//Referenced in AddReviewServlet.java
 	public static void addReview(String courseName, String professor, int workloadVal, int clarity, String comment) {
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(
@@ -192,6 +194,8 @@ public class SQL_Util {
 
 	}
 	
+	//Checks if the courseName exists in the database
+	//Referenced in FindCourse.java
 	public static boolean courseExists(String courseName) {
 		int courseCount = 0;
 		try {
@@ -215,6 +219,8 @@ public class SQL_Util {
 		return false;
 	}
 	
+	//Returns course details
+	//Referenced in FindCourse.java
 	public static Map<String,String> getCourseDetails(String courseName){
 		Map<String, String> courseDetails = new HashMap<>();		
 		try {
@@ -246,5 +252,6 @@ public class SQL_Util {
 		return courseDetails;
 		
 	}
+	
 
 }
