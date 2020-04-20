@@ -253,5 +253,94 @@ public class SQL_Util {
 		
 	}
 	
+	//Check if there exists at least one review of the given professor
+	//Referenced in FindReviewServlet.java
+	public static boolean reviewExists(String professorName) {
+		int reviewCount = 0;
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS count FROM Review WHERE professor=?");
+			preparedStatement.setString(1,professorName);
+			
+			//since we are geting information back we need to use result set to capture data
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				reviewCount = resultSet.getInt("count");
+				preparedStatement.close();
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if(reviewCount>0) return true;
+		return false;
+	}
+	
+	//Referenced in FindReviewServlet.java
+	public static Review getReview(String professorName) {
+		Review professorReview = new Review();
+		professorReview.setProfessorName(professorName);
+		professorReview.setValid(true);
+		double avgWorkload = 0;
+		double avgClarity = 0;
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT AVG(workloadVal) As avgWorkload FROM Review");
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			//Get average of workload
+			if(resultSet.next()) {
+				avgWorkload = resultSet.getDouble("avgWorkload");
+			}
+			
+			//Get average of clarity rating
+			preparedStatement = connection.prepareStatement("SELECT AVG(clarity) As avgClarity FROM Review");
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				avgClarity = resultSet.getDouble("avgClarity");
+			}
+			
+			//Professor score average of workload and clarity
+			professorReview.setScore((avgClarity+avgWorkload)/2);
+			
+			preparedStatement = connection.prepareStatement("SELECT * FROM Review r, UserRegistry u WHERE professor=? AND r.posterID = u.userID");
+			preparedStatement.setString(1,professorName);
+			
+			//since we are geting information back we need to use result set to capture data
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				String comment = resultSet.getString("comment");
+				int workload = resultSet.getInt("workloadVal");
+				int clarity = resultSet.getInt("clarity");
+				String studentName = resultSet.getString("fName");
+				String courseName = resultSet.getString("courseName");
+				
+				userReview currentReview = new userReview();
+				currentReview.setStudentName(studentName);
+				currentReview.setWorkload(workload);
+				currentReview.setClarity(clarity);
+				currentReview.setCourseName(courseName);
+				currentReview.setComment(comment);
+				professorReview.reviewList.add(currentReview);
+				
+				
+				//System.out.println(comment+ " "+workload+" "+clarity+" "+studentName+" "+courseName);
+				
+		}
+			
+			preparedStatement.close();
+
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return professorReview;
+		
+	}
+	
 
 }
