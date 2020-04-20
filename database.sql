@@ -163,7 +163,6 @@ VALUES
 CREATE TABLE Review
 (
     posterID INT(5) NOT NULL,
-    reviewID INT(5) PRIMARY KEY AUTO_INCREMENT,
     courseName VARCHAR(100) NOT NULL,
     professor VARCHAR(50) NOT NULL,
     workloadVal INT(5) NOT NULL,
@@ -173,6 +172,6 @@ CREATE TABLE Review
 );
 
 INSERT INTO  Review
-    (posterID, reviewID, courseName, professor, workloadVal, clarity, comment)
+    (posterID, courseName, professor, workloadVal, clarity, comment)
 VALUES
-    (1, 1, 'CSCI-104 Data Structures and Object Oriented Programming', 'Cote', 3, 4, 'good prof');
+    (1, 'CSCI-104 Data Structures and Object Oriented Programming', 'Cote', 3, 4, 'good prof');
