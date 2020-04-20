@@ -7,7 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * Servlet implementation class SchoolFormServlet
+ * Parameters from server: semester,year,courseName,professor,sectionNumber
+ * Send a string valid/invalid to the server
  */
 @WebServlet("/AddCourse")
 public class AddCourse extends HttpServlet {
@@ -26,7 +27,7 @@ public class AddCourse extends HttpServlet {
 			
 			String check = "invalid";
 			
-			//Receive data from from
+			//Receive data from frontend
 			String semester = request.getParameter("semester");
 			String year = request.getParameter("year");
 			String courseName = request.getParameter("courseName");
@@ -52,14 +53,13 @@ public class AddCourse extends HttpServlet {
 			            System.out.println("not a valid integer number"); 
 			        } 
 			    
-				 
-				 //add to database
+				 //all checks passed add to database
 				 if(check.equalsIgnoreCase("valid")) {
 					 SQL_Util.addCourse(semester, courseName,professorName, Integer.parseInt(sectionNumber), Integer.parseInt(year));
 				 }
 			}
 						
-			//Send to frontend
+			//Notify frontend
 			response.setContentType("text/plain");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(check);
