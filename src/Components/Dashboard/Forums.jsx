@@ -6,7 +6,9 @@ class Forums extends Component {
   state = {
     voteYes: false,
     voteNo: false,
-    sthread: ""
+    sthread: this.props.thread
+
+    //this does not load properly somehow
   };
 
   setColor = (s) => {
@@ -49,9 +51,14 @@ class Forums extends Component {
     return
   }
 
+  componentDidMount = () => {
+    //called once page renders
+    /*process the search key here (this.props.searchKey) and grab
+    other needed information from backend*/
+  };
 
   render() {
-    console.log(this.props.thread[0].comment);
+    console.log(this.state)
     return (
       <div>
         <h1 className="questionFormat">{this.props.question}</h1>
@@ -59,7 +66,9 @@ class Forums extends Component {
           <label for="comment">Reply:</label>
           <textarea className="form-control" rows="3" id="comment"></textarea>
         </div>
-        {this.props.thread.map((t)=>{
+        {
+          /*
+        this.state.sthread.map((t)=>{
           return(
             <div className="commentFormat">
             <h5 className="answerFormat">{t.comment}</h5>
@@ -67,7 +76,10 @@ class Forums extends Component {
             <p><button onClick={() => this.voteApprove()}><span style={this.setColor("yes")}>Approve</span></button>        <span style={this.setColor("no")}>Disapprove</span> </p>
             </div>
           );
-        })}
+          
+        })
+        */
+      }
       </div>
     );
   }
