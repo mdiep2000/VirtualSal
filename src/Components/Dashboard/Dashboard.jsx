@@ -64,7 +64,13 @@ class Dashboard extends Component {
           <label className="moduleTitle">My Forums</label>
         </div>
         <div className="forumsContainer">
-          <Forums />
+          <Forums
+            key={1}
+            question={"example"}
+            upvotes={0}
+            downvotes={0}
+            thread={null}
+          />
         </div>
         {/* <div className="questionsTitleContainer">
           <label className="moduleTitle">My Questions </label>
