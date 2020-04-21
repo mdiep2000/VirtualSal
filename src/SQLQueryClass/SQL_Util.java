@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.google.gson.Gson;
-
 public class SQL_Util {
 
 	// SET YOUR WORKBENCH LOGIN
@@ -192,7 +190,7 @@ public class SQL_Util {
 		}
 	}
 
-	public String signInValidation(String username, String pw) {
+	public static Map<String, String> signInValidation(String username, String pw) {
 		Map<String, String> userDetails = new HashMap<>();
 		try {
 			PreparedStatement preparedStatement = connection
@@ -221,7 +219,6 @@ public class SQL_Util {
 						userDetails.put("validSignIn", "false");
 						userDetails.put("validUsername", "true");
 						userDetails.put("username", username);
-
 					}
 				} else {
 					// Incorrect login - return JSON of only boolean
@@ -230,17 +227,17 @@ public class SQL_Util {
 
 				}
 				preparedStatement.close();
-				String json = new Gson().toJson(userDetails);
-				return json;
+
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Sqle: " + sqle.getMessage());
 		}
+		return userDetails;
 
 	}
 
 	// Gets a string of courseNames associated to the currentUserId
-	public String getUserCourses(int currentUserId) {
+	public static String getUserCourses(int currentUserId) {
 		String userCourses = "";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Schedule WHERE userID=?");
@@ -248,7 +245,7 @@ public class SQL_Util {
 			preparedStatement.setInt(1, currentUserId);
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
-				userCourses += rs.getString("courseName ");
+				userCourses += (rs.getString("courseName") + " ");
 			}
 			preparedStatement.close();
 			return userCourses;
