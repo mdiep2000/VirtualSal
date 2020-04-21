@@ -1,52 +1,52 @@
 .header {
-    color: white;
-    font-size: 1.4em;
-    font-family: "Raleway";
-    text-align: justify;
-    margin-top: 2%;
+  color: white;
+  font-size: 1.4em;
+  font-family: "Raleway";
+  text-align: justify;
+  margin-top: 2%;
 }
 
 .course {
-    margin-top: 2%;
-    margin-left: .8%;
+  margin-top: 2%;
+  margin-left: 0.8%;
 }
 
 .professor {
-    margin-bottom: 2%;
-    margin-left: .8%;
+  margin-bottom: 2%;
+  margin-left: 0.8%;
 }
 
-.clarification{
-    font-family: "Raleway";
-    color: white;
-    font-size: .73em;
+.clarification {
+  font-family: "Raleway";
+  color: white;
+  font-size: 0.73em;
 }
 
-.clarity{
-    margin-left: .8%;
+.clarity {
+  margin-left: 0.8%;
 }
 
-.workload{
-    margin-left: .8%;
+.workload {
+  margin-left: 0.8%;
 }
 
 .submit {
-    margin-left: 4%;
+  margin-left: 4%;
 }
 
-#form{
-    margin-left: 2%;
+#form {
+  margin-left: 2%;
 }
 
-.formContainer{
-    grid-template-columns: auto auto; /*split into 2 columns*/
-    position: fixed;
-    margin-top: 1%;
-    margin-left: 2%;
-    margin-right: 2%;
-    margin-bottom: 2%;
+.formContainerReview {
+  grid-template-columns: auto auto; /*split into 2 columns*/
+  position: fixed;
+  margin-top: 1%;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 2%;
 }
 
-.nonComment{
-    grid-area: 1 / 1 / 1 / 1;
+.nonComment {
+  grid-area: 1 / 1 / 1 / 1;
 }
