@@ -89,6 +89,8 @@ var exampleList = [
 
 class SearchResults extends Component {
   state = {
+    searchBarInput: "",
+    searchKey: "",
     resultsList: [
       {
         type: "",
@@ -102,6 +104,7 @@ class SearchResults extends Component {
     /*process the search key here (this.props.searchKey) and grab
     other needed information from backend*/
     this.setState({
+      searchKey: this.props.searchKey,
       resultsList: exampleList, //for testing purpose
     });
   };
@@ -113,6 +116,22 @@ class SearchResults extends Component {
       return result.data.course;
     }
   };
+
+  handleInput = () => {
+    const searchBarInput = document.getElementById("resultsSearch");
+    if (searchBarInput !== null) {
+      this.setState({ searchBarInput: searchBarInput.value });
+    }
+  };
+
+  handleSearch = () => {
+    //query backend
+    this.setState(
+      { searchKey: this.state.searchBarInput },
+      alert("searching for: " + this.state.searchBarInput) //just for testing
+    );
+  };
+
   render() {
     const searchLinks = this.state.resultsList.map((result) => (
       <div>
@@ -182,9 +201,24 @@ class SearchResults extends Component {
         <Switch>
           <Route path="/dashboard/search-results">
             <div className="searchResultsContainer">
+              <div className="resultsSearchBarContainer">
+                <input
+                  className="userSearchBar"
+                  id="resultsSearch"
+                  type="text"
+                  placeholder="SEARCH FOR A QUESTION, A FORUM, OR A CLASS"
+                  onInput={this.handleInput}
+                ></input>
+                <button
+                  onClick={this.handleSearch}
+                  className="userSearchButton"
+                >
+                  search
+                </button>
+              </div>
               <h1 className="searchResultsTitle">Search Results</h1>
               <h2 className="searchResultsSearchKey">
-                Showing Results For: {this.props.searchKey}
+                Showing Results For: {this.state.searchKey}
               </h2>
               {searchLinks}
             </div>

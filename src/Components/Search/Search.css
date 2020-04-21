@@ -19,3 +19,8 @@
   color: black;
   font-size: 1em;
 }
+
+.resultsSearchBarContainer {
+  float: right;
+  width: 80%;
+}
