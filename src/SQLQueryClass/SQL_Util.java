@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gson.Gson;
+
 public class SQL_Util {
 
 	// SET YOUR WORKBENCH LOGIN
@@ -61,7 +63,7 @@ public class SQL_Util {
 	}
 
 	// Add course to Schedule Table
-	//Referenced in AddCourse.java
+	// Referenced in AddCourse.java
 	public static void addCourse(String semester, String courseName, String professorName, int sectionNumber,
 			int term) {
 		try {
@@ -76,10 +78,6 @@ public class SQL_Util {
 			preparedStatement.setInt(6, sectionNumber);
 
 			preparedStatement.execute();
-			// Not sure how to exactly return a JSON in a different way - this requires a
-			// jar file to work?
-			// JSONObject jsobject = new JSONObject();
-			// jsobject.put("valid", true);
 			preparedStatement.close();
 
 		} catch (SQLException sqle) {
@@ -87,7 +85,7 @@ public class SQL_Util {
 		}
 	}
 
-	// Add course if it doesnt exist already - expected CS course list 
+	// Add course if it doesnt exist already - expected CS course list
 	// NO NEED FOR THIS FUNCTION-WE CAN JUST HARDCODE THE COURSE DETAILS
 	public static void addToCourseRegistry(String courseName, String courseDescription) {
 		try {
@@ -143,8 +141,36 @@ public class SQL_Util {
 		}
 	}
 
+	public void upvoteQuestion(int questionID) {
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("UPDATE Question SET upvote='upvote'+1 WHERE questionID=?");
+			preparedStatement.setInt(1, questionID);
+
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+		} catch (SQLException sqle) {
+			System.out.println("Sqle: " + sqle.getMessage());
+		}
+
+	}
+
+	public void downvoteQuestion(int questionID) {
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("UPDATE Question SET upvote='upvote'-1 WHERE questionID=?");
+			preparedStatement.setInt(1, questionID);
+
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+		} catch (SQLException sqle) {
+			System.out.println("Sqle: " + sqle.getMessage());
+		}
+
+	}
+
 	// Add a new review
-	//Referenced in AddReviewServlet.java
+	// Referenced in AddReviewServlet.java
 	public static void addReview(String courseName, String professor, int workloadVal, int clarity, String comment) {
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(
@@ -166,7 +192,8 @@ public class SQL_Util {
 		}
 	}
 
-	public static void signInValidation(String username, String pw) {
+	public String signInValidation(String username, String pw) {
+		Map<String, String> userDetails = new HashMap<>();
 		try {
 			PreparedStatement preparedStatement = connection
 					.prepareStatement("SELECT * FROM " + "UserRegistry WHERE username=? and pw=?");
@@ -179,63 +206,105 @@ public class SQL_Util {
 				if (username.contentEquals(rs.getString("username"))) {
 					if (pw.contentEquals(rs.getString("pw"))) {
 						// Login Successful - return JSON of user info & store currentUserId
+						// Sets the currentUserID - used in other functions
+						// Must call signInValidation before any other function!
 						currentUserId = rs.getInt("userID");
+						userDetails.put("validSignIn", "true");
+						userDetails.put("validUsername", "true");
+						userDetails.put("name", rs.getString("fname"));
+						userDetails.put("lastname", rs.getString("lname"));
+						userDetails.put("email", rs.getString("email"));
+						// list of courseNames - calls function
+						userDetails.put("courses", getUserCourses(currentUserId));
 					} else {
-						// Incorrect password
+						// Incorrect password - return JSON of username only
+						userDetails.put("validSignIn", "false");
+						userDetails.put("validUsername", "true");
+						userDetails.put("username", username);
+
 					}
 				} else {
-					// Incorrect login
-				}
-			}
+					// Incorrect login - return JSON of only boolean
+					userDetails.put("validSignIn", "false");
+					userDetails.put("validUsername", "false");
 
+				}
+				preparedStatement.close();
+				String json = new Gson().toJson(userDetails);
+				return json;
+			}
 		} catch (SQLException sqle) {
 			System.out.println("Sqle: " + sqle.getMessage());
 		}
 
 	}
-	
-	//Checks if the courseName exists in the database
-	//Referenced in FindCourse.java
+
+	// Gets a string of courseNames associated to the currentUserId
+	public String getUserCourses(int currentUserId) {
+		String userCourses = "";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Schedule WHERE userID=?");
+
+			preparedStatement.setInt(1, currentUserId);
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				userCourses += rs.getString("courseName ");
+			}
+			preparedStatement.close();
+			return userCourses;
+
+		} catch (SQLException sqle) {
+			System.out.println("Sqle: " + sqle.getMessage());
+		}
+		return userCourses;
+	}
+
+	// Checks if the courseName exists in the database
+	// Referenced in FindCourse.java
 	public static boolean courseExists(String courseName) {
 		int courseCount = 0;
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS count FROM CourseRegistry WHERE courseName=?");
-			preparedStatement.setString(1,courseName);
-			
-			//since we are geting information back we need to use result set to capture data
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("SELECT COUNT(*) AS count FROM CourseRegistry WHERE courseName=?");
+			preparedStatement.setString(1, courseName);
+
+			// since we are geting information back we need to use result set to capture
+			// data
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
-			if(resultSet.next()) {
+
+			if (resultSet.next()) {
 				courseCount = resultSet.getInt("count");
 				preparedStatement.close();
 			}
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		if(courseCount>0) return true;
+
+		if (courseCount > 0)
+			return true;
 		return false;
 	}
-	
-	//Returns course details
-	//Referenced in FindCourse.java
-	public static Map<String,String> getCourseDetails(String courseName){
-		Map<String, String> courseDetails = new HashMap<>();		
+
+	// Returns course details
+	// Referenced in FindCourse.java
+	public static Map<String, String> getCourseDetails(String courseName) {
+		Map<String, String> courseDetails = new HashMap<>();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM CourseRegistry WHERE courseName=?");
-			preparedStatement.setString(1,courseName);
-			
-			//since we are geting information back we need to use result set to capture data
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("SELECT * FROM CourseRegistry WHERE courseName=?");
+			preparedStatement.setString(1, courseName);
+
+			// since we are geting information back we need to use result set to capture
+			// data
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
-			if(resultSet.next()) {
+
+			if (resultSet.next()) {
 				String cName = resultSet.getString("courseName");
 				String semester = resultSet.getString("semester");
 				int sectionNumber = resultSet.getInt("sectionNumber");
 				String professorName = resultSet.getString("professorName");
-				
+
 				courseDetails.put("valid", "true");
 				courseDetails.put("semester", semester);
 				courseDetails.put("sectionNumber", String.valueOf(sectionNumber));
@@ -243,42 +312,42 @@ public class SQL_Util {
 				courseDetails.put("courseName", cName);
 				preparedStatement.close();
 			}
-			
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return courseDetails;
-		
+
 	}
-	
-	//Check if there exists at least one review of the given professor
-	//Referenced in FindReviewServlet.java
+
+	// Check if there exists at least one review of the given professor
+	// Referenced in FindReviewServlet.java
 	public static boolean reviewExists(String professorName) {
 		int reviewCount = 0;
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) AS count FROM Review WHERE professor=?");
-			preparedStatement.setString(1,professorName);
-			
-			//since we are geting information back we need to use result set to capture data
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("SELECT COUNT(*) AS count FROM Review WHERE professor=?");
+			preparedStatement.setString(1, professorName);
+
+			// since we are geting information back we need to use result set to capture
+			// data
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
-			if(resultSet.next()) {
+
+			if (resultSet.next()) {
 				reviewCount = resultSet.getInt("count");
 				preparedStatement.close();
 			}
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		if(reviewCount>0) return true;
+
+		if (reviewCount > 0)
+			return true;
 		return false;
 	}
-	
-	//Referenced in FindReviewServlet.java
+
+	// Referenced in FindReviewServlet.java
 	public static Review getReview(String professorName) {
 		Review professorReview = new Review();
 		professorReview.setProfessorName(professorName);
@@ -286,37 +355,40 @@ public class SQL_Util {
 		double avgWorkload = 0;
 		double avgClarity = 0;
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT AVG(workloadVal) As avgWorkload FROM Review");
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("SELECT AVG(workloadVal) As avgWorkload FROM Review");
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
-			//Get average of workload
-			if(resultSet.next()) {
+
+			// Get average of workload
+			if (resultSet.next()) {
 				avgWorkload = resultSet.getDouble("avgWorkload");
 			}
-			
-			//Get average of clarity rating
+
+			// Get average of clarity rating
 			preparedStatement = connection.prepareStatement("SELECT AVG(clarity) As avgClarity FROM Review");
 			resultSet = preparedStatement.executeQuery();
-			if(resultSet.next()) {
+			if (resultSet.next()) {
 				avgClarity = resultSet.getDouble("avgClarity");
 			}
-			
-			//Professor score average of workload and clarity
-			professorReview.setScore((avgClarity+avgWorkload)/2);
-			
-			preparedStatement = connection.prepareStatement("SELECT * FROM Review r, UserRegistry u WHERE professor=? AND r.posterID = u.userID");
-			preparedStatement.setString(1,professorName);
-			
-			//since we are geting information back we need to use result set to capture data
+
+			// Professor score average of workload and clarity
+			professorReview.setScore((avgClarity + avgWorkload) / 2);
+
+			preparedStatement = connection.prepareStatement(
+					"SELECT * FROM Review r, UserRegistry u WHERE professor=? AND r.posterID = u.userID");
+			preparedStatement.setString(1, professorName);
+
+			// since we are geting information back we need to use result set to capture
+			// data
 			resultSet = preparedStatement.executeQuery();
-			
-			while(resultSet.next()) {
+
+			while (resultSet.next()) {
 				String comment = resultSet.getString("comment");
 				int workload = resultSet.getInt("workloadVal");
 				int clarity = resultSet.getInt("clarity");
 				String studentName = resultSet.getString("fName");
 				String courseName = resultSet.getString("courseName");
-				
+
 				userReview currentReview = new userReview();
 				currentReview.setStudentName(studentName);
 				currentReview.setWorkload(workload);
@@ -324,23 +396,19 @@ public class SQL_Util {
 				currentReview.setCourseName(courseName);
 				currentReview.setComment(comment);
 				professorReview.reviewList.add(currentReview);
-				
-				
-				//System.out.println(comment+ " "+workload+" "+clarity+" "+studentName+" "+courseName);
-				
-		}
-			
+
+				// System.out.println(comment+ " "+workload+" "+clarity+" "+studentName+"
+				// "+courseName);
+
+			}
+
 			preparedStatement.close();
 
-			
-			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return professorReview;
-		
+
 	}
-	
 
 }
