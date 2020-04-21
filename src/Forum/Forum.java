@@ -16,12 +16,13 @@ public class Forum
     public Forum(String question) throws IOException
     {
         // Question
-    	
         this.question = question;
         // Vector of answers
+        answerList = Collections.synchronizedList(new ArrayList<Answer>());
+
         ServerSocket ss = new ServerSocket(3456);
         System.out.println("Bound to port 3456");
-        answerList = Collections.synchronizedList(new ArrayList<Answer>());
+
         while(true) {
         	System.out.println("Waiting for new answer...");
         	Socket s = ss.accept();

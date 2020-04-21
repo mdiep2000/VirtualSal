@@ -21,10 +21,10 @@ public class Client extends Thread{
 			this.s = s;
 			this.br = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			this.pw = new PrintWriter(s.getOutputStream());
-			this.name = name;
+			// this.name = name;
 			this.start();
 			
-			Scanner scan = new Scanner(System.in);
+			// Scanner scan = new Scanner(System.in);
 			// waiting for the user to upvote or downvote
 			while(true) {
 				System.out.println("Please upvote or downvote");
