@@ -7,12 +7,12 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Client extends Thread{
+public class Client extends Thread {
 	private BufferedReader br;
 	private PrintWriter pw;
 	private Socket s;
 	private String name = "User 1";
-	
+
 	public Client(String hostname, int port) {
 		try {
 			System.out.println("Try to connect to port 3456");
@@ -23,10 +23,10 @@ public class Client extends Thread{
 			this.pw = new PrintWriter(s.getOutputStream());
 			// this.name = name;
 			this.start();
-			
+
 			// Scanner scan = new Scanner(System.in);
 			// waiting for the user to upvote or downvote
-			while(true) {
+			while (true) {
 				System.out.println("Please upvote or downvote");
 				String line = scan.nextLine();
 				pw.println(line);
@@ -36,10 +36,10 @@ public class Client extends Thread{
 			System.out.println("ioe in Client constructor: " + ioe.getMessage());
 		}
 	}
-	
+
 	public void run() {
 		try {
-			while(true) {
+			while (true) {
 				String line = br.readLine(); // blocking line
 				System.out.println(line);
 			}
@@ -47,8 +47,8 @@ public class Client extends Thread{
 			System.out.println("ioe in ChatClient.run()" + ioe.getMessage());
 		}
 	}
-	
-	public static void main(String [] args) {
+
+	public static void main(String[] args) {
 		new Client("127.0.0.1", 3456);
 	}
 }

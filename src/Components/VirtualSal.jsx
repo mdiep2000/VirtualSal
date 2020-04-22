@@ -21,7 +21,7 @@ class VirtualSal extends Component {
 
   render() {
     return (
-      <Router>
+      <Router basename={process.env.REACT_APP_ROUTER_BASE || ""}>
         <div className="AppContainer">
           <Navbar />
           <Switch>
