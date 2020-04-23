@@ -134,31 +134,41 @@ VALUES
     -- Holds replies to a specific question
     CREATE TABLE Answer
     (
-        questionID INT(5) NOT NULL,
-        userID INT(5) NOT NULL,
-        answerBody VARCHAR(200) NULL,
-        upvotes INT(5) NULL,
-        downvotes INT(5) NULL,
-        FOREIGN KEY (userID) REFERENCES UserRegistry(userID),
-        FOREIGN KEY (questionID) REFERENCES Question(questionID)
+        answerID INT(5) PRIMARY KEY IDENTITY(1,1),
+        questionID INT
+        (5) NOT NULL,
+        userID INT
+        (5) NOT NULL,
+        answerBody VARCHAR
+        (200) NULL,
+        upvotes INT
+        (5) NULL,
+        downvotes INT
+        (5) NULL,
+        FOREIGN KEY
+        (userID) REFERENCES UserRegistry
+        (userID),
+        FOREIGN KEY
+        (questionID) REFERENCES Question
+        (questionID)
     );
 
     INSERT INTO Answer
-        (questionID, userID, answerBody, upvotes, downvotes)
+        (answerID, questionID, userID, answerBody, upvotes, downvotes)
     VALUES
-        (1, 1, 'nothing much', 3, 2);
+        (1, 1, 1, 'nothing much', 3, 2);
     INSERT INTO Answer
-        (questionID, userID, answerBody, upvotes, downvotes)
+        (answerID, questionID, userID, answerBody, upvotes, downvotes)
     VALUES
-        (1, 2, 'test', 0, 3);
+        (2, 1, 2, 'test', 0, 3);
     INSERT INTO Answer
-        (questionID, userID, answerBody, upvotes, downvotes)
+        (answerID,questionID, userID, answerBody, upvotes, downvotes)
     VALUES
-        (2, 1, 'example', 1, 3);
+        (3, 2, 1, 'example', 1, 3);
     INSERT INTO Answer
-        (questionID, userID, answerBody, upvotes, downvotes)
+        (answerID, questionID, userID, answerBody, upvotes, downvotes)
     VALUES
-        (2, 2, 'example', 3, 1);
+        (42, 2, 'example', 3, 1);
 
 
 

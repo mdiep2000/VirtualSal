@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
 
 public class SQL_Util {
 
@@ -119,6 +120,51 @@ public class SQL_Util {
 		}
 	}
 
+	public static Map<String, String> getQuestionAnswers(String keyword) {
+		Map<String, String> questionsAnswers = new HashMap<>();
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("SELECT * FROM " + "Question WHERE CONTAINS (questionBody, ?)");
+
+			preparedStatement.setString(1, keyword);
+
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				String courseName = rs.getString("courseName");
+				int posterID = rs.getInt("posterID");
+				int questionID = rs.getInt("questionID");
+				String questionTitle = rs.getString("questionTitle");
+				String questionBody = rs.getString("questionBody");
+
+				preparedStatement.close();
+
+			}
+		} catch (SQLException sqle) {
+			System.out.println("Sqle: " + sqle.getMessage());
+		}
+		return questionAnswers;
+	}
+
+	public static String getAnswerThread(int questionID) {
+		ArrayList< Map<String, pair<Integer,Integer>> > answerThread = new ArrayList< Map<String, pair<Integer,Integer>>>();
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("SELECT * FROM Answer WHERE questionID=?");
+
+			preparedStatement.setInt(1, questionID);
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				answerThread.add(rs.getString)
+			}
+			preparedStatement.close();
+			return userCourses;
+
+		} catch (SQLException sqle) {
+			System.out.println("Sqle: " + sqle.getMessage());
+		}
+		return answerThread;
+	}
+
 	// Add an answer to a question - must provide questionID associated with it.
 	public static void addAnswer(int questionID, String answerBody, int upvotes, int downvotes) {
 		try {
@@ -139,11 +185,11 @@ public class SQL_Util {
 		}
 	}
 
-	public void upvoteQuestion(int questionID) {
+	public void upvoteQuestion(int answerID) {
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("UPDATE Question SET upvote='upvote'+1 WHERE questionID=?");
-			preparedStatement.setInt(1, questionID);
+					.prepareStatement("UPDATE Answer SET upvotes='upvotes'+1 WHERE answerID=?");
+			preparedStatement.setInt(1, answerID);
 
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
@@ -153,11 +199,11 @@ public class SQL_Util {
 
 	}
 
-	public void downvoteQuestion(int questionID) {
+	public void downvoteAnswer(int answerID) {
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("UPDATE Question SET upvote='upvote'-1 WHERE questionID=?");
-			preparedStatement.setInt(1, questionID);
+					.prepareStatement("UPDATE Answer SET downvotes='downvotes'+1 WHERE answerID=?");
+			preparedStatement.setInt(1, answerID);
 
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
