@@ -188,8 +188,6 @@ class SearchResults extends Component {
             />
           </Route>
         );
-      } else {
-        return;
       }
     });
     // console.log("searchLinks");
