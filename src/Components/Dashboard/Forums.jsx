@@ -4,10 +4,8 @@ import SearchResults from "../Search/SearchResults";
 
 class Forums extends Component {
   state = {
-    voteYes: false,
-    voteNo: false,
     sthread: [],
-    //this does not load properly somehow
+    reply: ""
   };
 
   componentDidMount = () => {
@@ -15,72 +13,132 @@ class Forums extends Component {
     this.setState({ sthread: this.props.thread });
   };
 
-  setColor = (s) => {
-    if (s === "yes") {
-      if (!this.state.voteYes) {
-        return {
-          color: "limegreen",
-        };
-      }
-    } else if (s === "no") {
-      if (!this.state.voteNo) {
-        return {
-          color: "red",
-        };
+  /*
+  setColor = (s, key) => {
+    this.state.sthread.map(st =>{
+      if(st.key===key){
+        console.log("line 19 comment thread started");
+        console.log(st);
+        if(s==="yes"){
+          if(this.state.sthread.voteYes){
+            console.log("bad");
+            return  {
+              color: "Gainsboro",
+            };
+          }
+          console.log("good green is returned")
+          return  {
+            color: "green",
+          };
+        }
+        if(s==="no"){
+          if(this.state.sthread.voteYes){
+            console.log("bad");
+            return {
+              color: "Gainsboro",
+            };
+          }
+          console.log("good red is returned")
+          return {
+            color: "red",
+          };
+        }
       }
     }
-    return {
-      color: "Gainsboro",
-    };
+    )
+  };
+  */
+
+  voteApprove = (key) => {
+    this.setState({sthread: this.state.sthread.map(st =>{
+      if(st.key===key){
+        if(!st.voteYes){
+          st.voteYes=true
+          st.upvotes++
+        }
+      }
+      return st
+    })});
   };
 
-  voteApprove = (e) => {
-    if (!this.state.voteYes) {
-      //increment approve vote variable
-      //decrement disapprove vote variable
-    }
-    this.setState({ voteYes: true, voteNo: false });
-    return;
-  };
+  voteDisapprove = (key) => {
+    this.setState({sthread: this.state.sthread.map(st =>{
+      if(st.key===key){
+        if(!st.voteNo){
+          st.voteNo=true
+          st.downvotes++
+        }
+      }
+      return st
+    })});
+  }
 
-  voteDisapprove = (e) => {
-    if (!this.state.voteNo) {
-      //increment disapprove vote variable
-      //decrement approve vote variable
+  handlesubmit = () => {
+    if(this.state.reply==="" || this.state.reply===null){
+      alert("One or more fields left blank");
+      return;
     }
 
+    const newReply ={
+      key: 1000,
+      comment: this.state.reply,
+      upvotes: 0,
+      downvotes: 0,
+      voteYes: false,
+      voteNo: false
+    }
+
+    this.setState({
+      sthread: [...this.state.sthread, newReply]
+    });
+
+    document.getElementById("comment").innerHTML=""
+
     return;
+
+  }
+
+  change = e => {
+    e.preventDefault();
+    this.setState({
+      [e.target.name] : e.target.value
+    });
   };
 
   render() {
-    console.log(this.state.sthread);
     var threads = "";
     if (this.state.sthread) {
       threads = this.state.sthread.map((t) => (
         <div className="commentFormat">
           <h5 className="answerFormat">{t.comment}</h5>
           <p>
+            <button className = "buttonFormat" onClick={() => this.voteApprove(t.key)}>
+            <span style={{color:"green"}}>Approve</span>
+            </button>{"         "}
             <span className="numLikes">{t.upvotes}</span>{" "}
-            <span className="numDisLikes">{t.downvotes}</span>
-          </p>
-          <p>
-            <button onClick={() => this.voteApprove()}>
-              <span style={this.setColor("yes")}>Approve</span>
-            </button>{" "}
-            <span style={this.setColor("no")}>Disapprove</span>{" "}
+           <button className = "buttonFormat" onClick={() => this.voteDisapprove(t.key)}>
+           <span style={{color: "red"}}>Disapprove</span>
+           </button> {" "}
+           <span className="numDisLikes">{t.downvotes}</span>
           </p>
         </div>
       ));
     } else {
       //i'd add something to fill this in case we get a forum without any comments ie null thread
+      threads = <h2>No answers to this question from Trojans yet.</h2>
     }
     return (
       <div>
         <h1 className="questionFormat">{this.props.question}</h1>
+        <form onSubmit={this.handlesubmit}>
         <div className="form-group w-50">
           <label for="comment">Reply:</label>
-          <textarea className="form-control" rows="3" id="comment"></textarea>
+          <textarea className="form-control" rows="3" id="comment" name="reply" onchange={e => this.change(e)}></textarea>
         </div>
+        <div className="submit">
+            <input type="submit" value="Post Reply" />
+        </div>
+        </form>
         {threads}
       </div>
     );

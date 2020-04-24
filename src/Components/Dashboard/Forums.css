@@ -4,12 +4,33 @@
     font-weight: bold;
 }
 
+.answerFormat{
+    font-size: 1.25em;
+    font-family: "Raleway";
+}
+
 .numLikes{
-    color: limegreen;
+    color: green;
+    font-size: 1.1em;
 
 }
 
 
-.numDislikes{
+.numDisLikes{
     color: red;
+    font-size: 1.1em;
 }
+
+.commentFormat{
+    background-color: rgb(192, 173, 62);
+    width: 70%;
+    margin-left: 5%;
+}
+
+.buttonFormat{
+    width: 10em;
+    height: 1.8em;
+    font-size: 1.5em;
+    
+}
+

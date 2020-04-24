@@ -18,15 +18,20 @@ var exampleList = [
       downvotes: 4,
       thread: [
         {
+          key: 1,
           comment: "nothing much",
           upvotes: 3,
           downvotes: 2,
+          voteYes: false,
+          voteNo: false,
         },
 
         {
           comment: "test",
           upvotes: 0,
           downvotes: 3,
+          voteYes: false,
+          voteNo: false,
         },
       ],
     },
@@ -51,14 +56,19 @@ var exampleList = [
       downvotes: 4,
       thread: [
         {
+          key: 3,
           comment: "example ",
           upvotes: 1,
           downvotes: 3,
+          voteYes: false,
+          voteNo: false
         },
         {
           comment: "example ",
           upvotes: 3,
           downvotes: 1,
+          voteYes: false,
+          voteNo: false
         },
       ],
     },
