@@ -1,3 +1,4 @@
+package Backend.Servlets.Questions;
 import java.util.ArrayList;
 
 public class QuestionClass 
@@ -7,7 +8,7 @@ public class QuestionClass
     private int questionID;
     private String questionTitle;
     private String questionBody;
-    public ArrayList<Answers> answerThread = new ArrayList<Anwers>();
+    public ArrayList<AnswerClass> answerThread = new ArrayList<AnswerClass>();
 
 	
 	public String getCourseName() {

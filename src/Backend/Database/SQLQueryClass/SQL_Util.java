@@ -1,3 +1,6 @@
+package Backend.Database.SQLQueryClass;
+import Backend.Servlets.Questions.*;
+import Backend.Servlets.Review.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -154,7 +157,7 @@ public class SQL_Util {
 
 	public static ArrayList<AnswerClass> getAnswer(int questionID, int posterID) {
 		ArrayList<AnswerClass> answerThread = new ArrayList<AnswerClass>();
-		AnswerClass answer = new Answer();
+		AnswerClass answer = new AnswerClass();
 		answer.setQuestionID(questionID);
 		answer.setUserID(posterID);
 		try {
@@ -165,9 +168,9 @@ public class SQL_Util {
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				String answerBody = rs.getString("answerBody");
-				int upvotes = rs.getInt("upvotes"));
+				int upvotes = rs.getInt("upvotes");
 				int downvotes = rs.getInt("downvotes");	
-				answer.setBody(answerBody);
+				answer.setAnswerBody(answerBody);
 				answer.setUpvotes(upvotes);
 				answer.setDownvotes(downvotes);
 				answerThread.add(answer);
@@ -214,7 +217,7 @@ public class SQL_Util {
 
 	}
 
-	public void downvoteAnswer(int answerID) {
+	public static void downvoteAnswer(int answerID) {
 		try {
 			PreparedStatement preparedStatement = connection
 					.prepareStatement("UPDATE Answer SET downvotes='downvotes'+1 WHERE answerID=?");
@@ -467,6 +470,11 @@ public class SQL_Util {
 		}
 		return professorReview;
 
+	}
+
+	public static void upvoteAnswer(int parseInt) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
