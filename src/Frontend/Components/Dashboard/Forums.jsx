@@ -90,11 +90,6 @@ class Forums extends Component {
       voteYes: false,
       voteNo: false
     }
-    this.props.handlenewComment(newReply)
-
-    this.setState({
-      reply: ""
-    });
 
     return;
 

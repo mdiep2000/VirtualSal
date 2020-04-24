@@ -1,3 +1,6 @@
+package Backend.Servlets.Review;
+import Backend.Database.SQLQueryClass.*;
+
 import java.util.Vector;
 
 public class Review {

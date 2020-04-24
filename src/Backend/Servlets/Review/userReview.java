@@ -1,3 +1,6 @@
+package Backend.Servlets.Review;
+import Backend.Database.SQLQueryClass.*;
+
 public class userReview {
 	private String studentName;
 	private String comment;

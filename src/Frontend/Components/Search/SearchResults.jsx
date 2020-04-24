@@ -142,10 +142,7 @@ class SearchResults extends Component {
       alert("searching for: " + this.state.searchBarInput) //just for testing
     );
   };
-
-  handleNewComment = (comment) => {
-    
-  }
+  
 
   render() {
     const searchLinks = this.state.resultsList.map((result) => (
