@@ -168,7 +168,7 @@ VALUES
 INSERT INTO Answer
     (answerID, questionID, userID, answerBody, upvotes, downvotes)
 VALUES
-    (42, 2, 'example', 3, 1);
+    (42, 2, 1, 'example', 3, 1);
 
 
 

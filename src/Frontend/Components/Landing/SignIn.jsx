@@ -26,16 +26,17 @@ class SignIn extends Component {
     }
     //VALIDATE AGAINST SQL DATABASE
     $.ajax({
-      url: "/signInValidation",
+      url: "http://localhost:8080/signInValidation",
       data: {
         username: username,
         password: password,
       },
       success: function (data) {
+        console.log(data);
         alert("success");
       },
     });
-    validated = true; //only for testing purposes
+    validated = false; //only for testing purposes
     if (!validated) {
       alert("Incorrect Username or Password. Please try again.");
       event.preventDefault();
