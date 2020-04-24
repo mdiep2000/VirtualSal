@@ -23,9 +23,9 @@ public class DownVoteAnswer extends HttpServlet {
         SQL_Util.initConnection();
 
         // Receive data from server
-        int answerID = request.getParameter("answerID");
+        String answerID = request.getParameter("answerID");
         // No Error Checking currently - assume we get a valid answerID
-        SQL_Util.downvoteAnswer(answerID);
+        SQL_Util.downvoteAnswer(Integer.parseInt(answerID));
     }
 
     /**

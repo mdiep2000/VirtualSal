@@ -120,8 +120,8 @@ public class SQL_Util {
 		}
 	}
 
-	public static Map<String, String> getQuestionAnswers(String keyword) {
-		Map<String, String> questionsAnswers = new HashMap<>();
+	public static QuestionClass getQuestionAnswers(String keyword) {
+		QuestionClass question = new QuestionClass();
 		try {
 			PreparedStatement preparedStatement = connection
 					.prepareStatement("SELECT * FROM " + "Question WHERE CONTAINS (questionBody, ?)");
@@ -136,17 +136,27 @@ public class SQL_Util {
 				String questionTitle = rs.getString("questionTitle");
 				String questionBody = rs.getString("questionBody");
 
+				question.setCourseName(courseName);
+				question.setPosterID(posterID);
+				question.setQuestionID(questionID);
+				question.setQuestionTitle(questionTitle);
+				question.setQuestionBody(questionBody);
+				//This is where I would need to get the answers associated with the question ID 
+				question.answerThread = getAnswer(questionID, posterID);
 				preparedStatement.close();
 
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Sqle: " + sqle.getMessage());
 		}
-		return questionAnswers;
+		return question;
 	}
 
-	public static String getAnswerThread(int questionID) {
-		ArrayList< Map<String, pair<Integer,Integer>> > answerThread = new ArrayList< Map<String, pair<Integer,Integer>>>();
+	public static ArrayList<AnswerClass> getAnswer(int questionID, int posterID) {
+		ArrayList<AnswerClass> answerThread = new ArrayList<AnswerClass>();
+		AnswerClass answer = new Answer();
+		answer.setQuestionID(questionID);
+		answer.setUserID(posterID);
 		try {
 			PreparedStatement preparedStatement = connection
 					.prepareStatement("SELECT * FROM Answer WHERE questionID=?");
@@ -154,10 +164,15 @@ public class SQL_Util {
 			preparedStatement.setInt(1, questionID);
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
-				answerThread.add(rs.getString)
+				String answerBody = rs.getString("answerBody");
+				int upvotes = rs.getInt("upvotes"));
+				int downvotes = rs.getInt("downvotes");	
+				answer.setBody(answerBody);
+				answer.setUpvotes(upvotes);
+				answer.setDownvotes(downvotes);
+				answerThread.add(answer);
 			}
 			preparedStatement.close();
-			return userCourses;
 
 		} catch (SQLException sqle) {
 			System.out.println("Sqle: " + sqle.getMessage());
@@ -225,8 +240,8 @@ public class SQL_Util {
 			preparedStatement.setString(2, courseName);
 			preparedStatement.setString(3, professor);
 			preparedStatement.setInt(4, workloadVal);
-			preparedStatement.setInt(45, clarity);
-			preparedStatement.setString(5, comment);
+			preparedStatement.setInt(5, clarity);
+			preparedStatement.setString(6, comment);
 
 			preparedStatement.execute();
 			preparedStatement.close();

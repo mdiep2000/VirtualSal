@@ -27,14 +27,11 @@ public class AddQuestions extends HttpServlet {
         Map<String, String> data = new HashMap<>();
 
         // Receive data from server - not sure if this is how we are searching
-        String username = request.getParameter("keyword");
+        String courseName = request.getParameter("courseName");
+        String questionTitle = request.getParameter("questionTitle");
+        String questionBody = request.getParameter("questionBody");
 
-        // ADD CODE FOR SEARCHING FOR A QUESTION
-
-        String json = new Gson().toJson(data);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+        SQL_Util.addQuestion(courseName, questionTitle, questionBody);
     }
 
     /**

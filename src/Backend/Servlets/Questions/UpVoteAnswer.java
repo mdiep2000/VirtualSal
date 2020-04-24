@@ -23,9 +23,9 @@ public class UpVoteAnswer extends HttpServlet {
         SQL_Util.initConnection();
 
         // Receive data from server
-        int answerID = request.getParameter("answerID");
+        String answerID = request.getParameter("answerID");
         // No Error Checking currently - assume we get a valid answerID
-        SQL_Util.upvoteAnswer(answerID);
+        SQL_Util.upvoteAnswer(Integer.parseInt(answerID));
     }
 
     /**
