@@ -3,7 +3,12 @@ import React, { Component } from "react";
 class Info extends Component {
   state = {};
   render() {
-    return <h1>Info</h1>;
+    return (
+    <div>
+       <span style = {{color: "white"}}>Hello, {localStorage.getItem("username")}</span>
+    </div>
+      
+    );
   }
 }
 
