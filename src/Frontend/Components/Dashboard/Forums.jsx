@@ -79,30 +79,32 @@ class Forums extends Component {
       return;
     }
 
+    var key = this.state.sthread[this.state.sthread.length -1].key;
+    key=key+1;
+
     const newReply ={
-      key: 1000,
+      key: key,
       comment: this.state.reply,
       upvotes: 0,
       downvotes: 0,
       voteYes: false,
       voteNo: false
     }
+    this.props.handlenewComment(newReply)
 
     this.setState({
-      sthread: [...this.state.sthread, newReply]
+      reply: ""
     });
-
-    document.getElementById("comment").innerHTML=""
 
     return;
 
   }
 
-  change = e => {
-    e.preventDefault();
+  onchange = e => {
     this.setState({
-      [e.target.name] : e.target.value
+      reply: e.target.value
     });
+
   };
 
   render() {
@@ -133,7 +135,7 @@ class Forums extends Component {
         <form onSubmit={this.handlesubmit}>
         <div className="form-group w-50">
           <label for="comment">Reply:</label>
-          <textarea className="form-control" rows="3" id="comment" name="reply" onchange={e => this.change(e)}></textarea>
+          <textarea className="form-control" rows="3" id="comment" name="reply" value={this.state.reply} onChange={this.onchange}></textarea>
         </div>
         <div className="submit">
             <input type="submit" value="Post Reply" />

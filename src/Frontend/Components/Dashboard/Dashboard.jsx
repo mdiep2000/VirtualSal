@@ -5,7 +5,7 @@ import Schedule from "./Schedule.jsx";
 import Info from "./Info.jsx";
 import Forums from "./Forums.jsx";
 import { Link } from "react-router-dom";
-import Review from "./Review";
+import Review from "./Review.jsx";
 class Dashboard extends Component {
   state = {};
 
@@ -46,13 +46,10 @@ class Dashboard extends Component {
           <label className="moduleTitle">My Reviews</label>
         </div>
         <div className="reviewContainer">
-          <Link to="/review">
+          <Link to="/dashboard/review">
             <button className="reviewText">Review Courses</button>
+            <Review />
           </Link>
-          <Review />
-        </div>
-        <div className="reviewTitleContainer">
-          <label className="moduleTitle">My Reviews</label>
         </div>
         <div className="infoTitleContainer">
           <label className="moduleTitle">My Info</label>

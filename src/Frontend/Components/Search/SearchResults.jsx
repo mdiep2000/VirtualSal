@@ -27,6 +27,7 @@ var exampleList = [
         },
 
         {
+          key: 2,
           comment: "test",
           upvotes: 0,
           downvotes: 3,
@@ -142,6 +143,10 @@ class SearchResults extends Component {
     );
   };
 
+  handleNewComment = (comment) => {
+    
+  }
+
   render() {
     const searchLinks = this.state.resultsList.map((result) => (
       <div>
@@ -169,6 +174,7 @@ class SearchResults extends Component {
               upvotes={result.data.upvotes}
               downvotes={result.data.downvotes}
               thread={result.data.thread}
+              handleSubmit={this.handleNewComment}
             />
           </Route>
         );

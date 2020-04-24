@@ -27,7 +27,7 @@ class Review extends Component {
     ) {
       alert("One or more fields left blank");
       e.preventDefault();
-      e.stopPropogation();
+      e.stopPropagation();
     }
     //log into SQL database
     return;
