@@ -1,3 +1,5 @@
+package Backend.Servlets.Search;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,7 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-package Search;
+import Backend.Database.SQLQueryClass.SQL_Util;
+
 
 @WebServlet("/SearchResultsServlet")
 public class SearchResultsServlet extends HttpServlet {
@@ -28,15 +31,15 @@ public class SearchResultsServlet extends HttpServlet {
 			String searchBarInput = request.getParameter("searchBarInput");
 			
             // Multiple threads to return search from forums, reviews, courses
-            SearchThread(searchBarInput, "forums");
-            SearchThread(searchBarInput, "reviews");
-            SearchThread(searchBarInput, "courses");
+            SearchThread forumsThread = new SearchThread(searchBarInput, "forums");
+            SearchThread reviewsThread = new SearchThread(searchBarInput, "reviews");
+            SearchThread coursesThread = new SearchThread(searchBarInput, "courses");
 			
-			//Send to frontend
-			String json = new Gson().toJson();
-		    response.setContentType("application/json");
-		    response.setCharacterEncoding("UTF-8");
-		    response.getWriter().write(json);
+			//Send to frontend [CONTAINS SYNTAX ERRORS]
+//			String json = new Gson().toJson();
+//		    response.setContentType("application/json");
+//		    response.setCharacterEncoding("UTF-8");
+//		    response.getWriter().write(json);
 	}
 
 	/**
