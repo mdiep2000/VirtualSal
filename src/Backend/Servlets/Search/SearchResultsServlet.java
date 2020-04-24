@@ -61,6 +61,13 @@ class SearchThread extends Thread
     public void run()
     {
         // Look into database related to searchType (forum, review, course)
+
+        // Find Forum
+
+        // Find Review
+
+        // Find Course
+        
         // Return all associated values
     }
 }
