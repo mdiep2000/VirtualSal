@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form } from "react-bootstrap";
 import "../../App.css";
 import { Link } from "react-router-dom";
+import $ from "jquery";
 
 class SignIn extends Component {
   constructor(props) {
@@ -24,6 +25,16 @@ class SignIn extends Component {
       return;
     }
     //VALIDATE AGAINST SQL DATABASE
+    $.ajax({
+      url: "/signInValidation",
+      data: {
+        username: username,
+        password: password,
+      },
+      success: function (data) {
+        alert("success");
+      },
+    });
     validated = true; //only for testing purposes
     if (!validated) {
       alert("Incorrect Username or Password. Please try again.");
@@ -65,7 +76,7 @@ class SignIn extends Component {
             </Form.Text> */}
           </Form.Group>
           <Form.Group controlId="password">
-            <Form.Control type="password" placeholder="PASSWORD" required  />
+            <Form.Control type="password" placeholder="PASSWORD" required />
           </Form.Group>
           <Link
             to="/dashboard"

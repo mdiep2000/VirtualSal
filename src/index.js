@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "./Frontend/index.css";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.css";
-import VirtualSal from "./Components/VirtualSal.jsx";
+import VirtualSal from "./Frontend/Components/VirtualSal.jsx";
 ReactDOM.render(
   <React.StrictMode>
     <VirtualSal />
