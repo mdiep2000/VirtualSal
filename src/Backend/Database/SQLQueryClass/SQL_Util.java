@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 import java.util.ArrayList;
 
 public class SQL_Util {
@@ -508,5 +509,42 @@ public class SQL_Util {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public static Stack<Map<String,String>> getUsersCourses() {
+		Stack<Map<String, String>> userCourses = new Stack<Map<String, String>>();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Schedule s, UserRegistry u WHERE u.userID=? AND u.userID = s.userID");
+			preparedStatement.setInt(1,currentUserId);
+			
+			//since we are geting information back we need to use result set to capture data
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				Map<String, String> courseDetails = new HashMap<>();
+				String cName = resultSet.getString("courseName");
+				String semester = resultSet.getString("semester");
+				int sectionNumber = resultSet.getInt("sectionNumber");
+				String professorName = resultSet.getString("professorName");
+				
+				courseDetails.put("semester", semester);
+				courseDetails.put("sectionNumber", String.valueOf(sectionNumber));
+				courseDetails.put("professorName", professorName);
+				courseDetails.put("courseName", cName);
+				
+				userCourses.push(courseDetails);
+				
+			}
+			
+			preparedStatement.close();
+
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return userCourses;
+	}
+	
 
 }
