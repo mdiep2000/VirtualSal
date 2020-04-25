@@ -4,29 +4,7 @@ import Dashboard from "./Dashboard";
 import GuestDashboard from "./GuestDashboard";
 import Forums from "./Forums";
 import SearchResults from "../Search/SearchResults";
-
-var sampleForum = {
-  type: "forum",
-  id: 1,
-  data: {
-    question: "what's up?",
-    upvotes: 5,
-    downvotes: 4,
-    thread: [
-      {
-        comment: "nothing much",
-        upvotes: 3,
-        downvotes: 2,
-      },
-
-      {
-        comment: "test",
-        upvotes: 0,
-        downvotes: 3,
-      },
-    ],
-  },
-};
+import popularForums from "./popularForums.jsx";
 
 class DashboardLanding extends Component {
   state = {
@@ -48,7 +26,7 @@ class DashboardLanding extends Component {
               <Dashboard onSearch={this.handleSearch} />
             )}
           </Route>
-          <Route path="/dashboard/forums">
+          {/* <Route path="/dashboard/forums">
             <Forums
               key={1}
               question={sampleForum.question}
@@ -56,10 +34,23 @@ class DashboardLanding extends Component {
               downvotes={sampleForum.downvotes}
               thread={sampleForum.thread}
             />
-          </Route>
+          </Route> */}
           <Route path="/dashboard/search-results">
             <SearchResults searchKey={this.state.searchKey} />
           </Route>
+          {
+            (popularForums.map = (forum) => (
+              <Route path={"/dashboard/forum-id=" + forum.id}>
+                <Forums
+                  key={forum.id}
+                  question={forum.question}
+                  upvotes={forum.upvotes}
+                  downvotes={forum.downvotes}
+                  thread={forum.thread}
+                />
+              </Route>
+            ))
+          }
         </Switch>
       </Router>
     );

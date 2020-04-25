@@ -3,9 +3,9 @@ import "./Dashboard.css";
 import "./Dashboard.css";
 import Schedule from "./Schedule.jsx";
 import Info from "./Info.jsx";
-import Forums from "./Forums.jsx";
 import { Link } from "react-router-dom";
 import Review from "./Review.jsx";
+import popularForums from "./popularForums.jsx";
 class Dashboard extends Component {
   state = {};
 
@@ -58,16 +58,16 @@ class Dashboard extends Component {
           <Info />
         </div>
         <div className="forumsTitleContainer">
-          <label className="moduleTitle">My Forums</label>
+          <label className="moduleTitle">Popular Forums</label>
         </div>
         <div className="forumsContainer">
-          <Forums
-            key={1}
-            question={"example"}
-            upvotes={0}
-            downvotes={0}
-            thread={null}
-          />
+          {
+            (popularForums.map = (forum) => (
+              <Link to={"forum-id=" + forum.id} style={"color: white"}>
+                test
+              </Link>
+            ))
+          }
         </div>
         {/* <div className="questionsTitleContainer">
           <label className="moduleTitle">My Questions </label>
