@@ -59,6 +59,13 @@ public class SQL_Util {
 			// jsobject.put("valid", true);
 			preparedStatement.close();
 
+			System.out.println("made it to line 62");
+			
+			PreparedStatement ps = connection.prepareStatement("SELECT userID from UserRegistry WHERE username=?");
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+			currentUserId = rs.getInt("userID");
+
 		} catch (SQLException sqle) {
 			System.out.println("Sqle: " + sqle.getMessage());
 		}
