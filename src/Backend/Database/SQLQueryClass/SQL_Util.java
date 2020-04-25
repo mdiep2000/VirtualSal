@@ -1,4 +1,5 @@
 package Backend.Database.SQLQueryClass;
+
 import Backend.Servlets.Questions.*;
 import Backend.Servlets.Review.*;
 import java.sql.Connection;
@@ -53,14 +54,10 @@ public class SQL_Util {
 			preparedStatement.setString(6, pw);
 
 			preparedStatement.execute();
-			// Not sure how to exactly return a JSON in a different way - this requires a
-			// jar file to work?
-			// JSONObject jsobject = new JSONObject();
-			// jsobject.put("valid", true);
 			preparedStatement.close();
 
 			System.out.println("made it to line 62");
-			
+
 			PreparedStatement ps = connection.prepareStatement("SELECT userID from UserRegistry WHERE username=?");
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
@@ -146,12 +143,14 @@ public class SQL_Util {
 				String questionTitle = rs.getString("questionTitle");
 				String questionBody = rs.getString("questionBody");
 
+				question.setValid(true);
 				question.setCourseName(courseName);
 				question.setPosterID(posterID);
 				question.setQuestionID(questionID);
 				question.setQuestionTitle(questionTitle);
 				question.setQuestionBody(questionBody);
-				//This is where I would need to get the answers associated with the question ID 
+				// This is where I would need to get the answers associated with the question ID
+				// GetAnswer returns an arrayList of answers
 				question.answerThread = getAnswer(questionID, posterID);
 				preparedStatement.close();
 
@@ -176,7 +175,7 @@ public class SQL_Util {
 			while (rs.next()) {
 				String answerBody = rs.getString("answerBody");
 				int upvotes = rs.getInt("upvotes");
-				int downvotes = rs.getInt("downvotes");	
+				int downvotes = rs.getInt("downvotes");
 				answer.setAnswerBody(answerBody);
 				answer.setUpvotes(upvotes);
 				answer.setDownvotes(downvotes);
@@ -261,29 +260,27 @@ public class SQL_Util {
 		}
 	}
 
-	public static Map<String, String> signupValidation(String username, String email){
+	public static Map<String, String> signupValidation(String username, String email) {
 		Map<String, String> ud = new HashMap<>();
-		try{
+		try {
 			PreparedStatement ps = connection.prepareStatement("SELECT * FROM " + "UserRegistry WHERE username=?");
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
-			if(rs.next()){
+			if (rs.next()) {
 				ud.put("validUserName", "false");
-			}
-			else{
+			} else {
 				ud.put("validUserName", "true");
 			}
 			ps = connection.prepareStatement("SELECT * FROM UserRegistry WHERE email=?");
 			ps.setString(1, email);
 			rs = ps.executeQuery();
-			if(rs.next()){
+			if (rs.next()) {
 				ud.put("validEmail", "false");
-			}
-			else{
+			} else {
 				ud.put("validEmail", "true");
 			}
 			ps.close();
-		}catch (SQLException sqle) {
+		} catch (SQLException sqle) {
 			System.out.println("Sqle: " + sqle.getMessage());
 		}
 		return ud;
@@ -509,7 +506,7 @@ public class SQL_Util {
 
 	public static void upvoteAnswer(int parseInt) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
