@@ -26,41 +26,47 @@ class SignIn extends Component {
     }
     //VALIDATE AGAINST SQL DATABASE
     $.ajax({
-      url: "http://localhost:8080/signInValidation",
+      url: "http://localhost:8080/VirtualSal/signInValidation",
       data: {
         username: username,
         password: password,
       },
+      async: false,
       success: function (data) {
         console.log(data);
-        alert("success");
+        console.log(data.validSignIn);
+        if (data.validSignIn) {
+          //valid
+          const fname = data.name;
+          const lname = data.lastname;
+          const email = data.email;
+          const courses = data.courses;
+          localStorage.setItem("username", username);
+          localStorage.setItem("fullName", fname + " " + lname);
+          localStorage.setItem("email", email);
+          localStorage.setItem("courses", courses);
+          alert("You are now signed in!");
+        } else if (
+          data.validSignIn === "false" &&
+          data.validUsername === "true"
+        ) {
+          //invalid, yet correct username
+          alert("Incorrect Password. Please try again.");
+          event.preventDefault();
+          event.stopPropagation();
+          //reset form
+          document.getElementById("username").value = "";
+        } else {
+          //invalid
+          alert("Incorrect Username and Password. Please try again.");
+          event.preventDefault();
+          event.stopPropagation();
+          //reset form
+          document.getElementById("username").value = "";
+          document.getElementById("password").value = "";
+        }
       },
     });
-    validated = false; //only for testing purposes
-    if (!validated) {
-      alert("Incorrect Username or Password. Please try again.");
-      event.preventDefault();
-      event.stopPropagation();
-      //reset form
-      document.getElementById("username").value = "";
-      document.getElementById("password").value = "";
-    } else {
-      this.setState(
-        {
-          username: username,
-          password: password,
-        },
-        () =>
-          console.log(
-            "username: " +
-              this.state.username +
-              ", password: " +
-              this.state.password
-          )
-      );
-      localStorage.setItem("username", username);
-      alert("You are now signed in!");
-    }
   };
 
   render() {

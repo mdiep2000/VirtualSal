@@ -40,7 +40,9 @@ public class signInValidation extends HttpServlet {
         } else {
             data = SQL_Util.signInValidation(username, password);
         }
-
+        //Get clients origin
+        String clientOrigin = request.getHeader("origin");
+        response.setHeader("Access-Control-Allow-Origin", clientOrigin);
         String json = new Gson().toJson(data);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
