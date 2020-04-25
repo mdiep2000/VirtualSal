@@ -183,3 +183,9 @@
   margin: 2% 40% 0% 40%;
   overflow-x: hidden;
 }
+
+.popularForumLink {
+  margin: 5%;
+  font-family: "Raleway";
+  font-size: 1em;
+}

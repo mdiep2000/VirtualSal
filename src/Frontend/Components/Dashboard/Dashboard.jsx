@@ -5,7 +5,7 @@ import Schedule from "./Schedule.jsx";
 import Info from "./Info.jsx";
 import { Link } from "react-router-dom";
 import Review from "./Review.jsx";
-import popularForums from "./popularForums.jsx";
+import { popularForums } from "./popularForums.jsx";
 class Dashboard extends Component {
   state = {};
 
@@ -21,7 +21,7 @@ class Dashboard extends Component {
       <div class="dashboardContainer">
         <div className="welcomeContainer">
           <h1 className="welcomeText">
-            WELCOME, {localStorage.getItem("username")}
+            WELCOME, {localStorage.getItem("fullName")}
           </h1>
         </div>
         <div className="userSearchBarContainer">
@@ -61,13 +61,17 @@ class Dashboard extends Component {
           <label className="moduleTitle">Popular Forums</label>
         </div>
         <div className="forumsContainer">
-          {
-            (popularForums.map = (forum) => (
-              <Link to={"forum-id=" + forum.id} style={"color: white"}>
-                test
+          {popularForums.map((forum) => (
+            <div className="popularForumLink">
+              <Link
+                to={"dashboard/forum-id=" + forum.id}
+                style={{ color: "white" }}
+              >
+                {forum.question}
               </Link>
-            ))
-          }
+              <br />
+            </div>
+          ))}
         </div>
         {/* <div className="questionsTitleContainer">
           <label className="moduleTitle">My Questions </label>
