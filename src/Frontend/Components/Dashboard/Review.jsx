@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Review.css";
+import $ from "jquery";
 
 class Review extends Component {
   state = {
@@ -28,8 +29,19 @@ class Review extends Component {
       alert("One or more fields left blank");
       e.preventDefault();
       e.stopPropagation();
+      return;
     }
     //log into SQL database
+    $.ajax({
+      url: "http://localhost:8080/VirtualSal/AddReviewServlet",
+      data: {
+        courseName: this.state.course,
+        workload: this.state.workload,
+        clarity: this.state.clarity,
+        comment: this.state.comment,
+        professor: this.state.professor,
+      }
+    });
     return;
   };
   render() {

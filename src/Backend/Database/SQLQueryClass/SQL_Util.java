@@ -254,11 +254,39 @@ public class SQL_Util {
 		}
 	}
 
+	public static Map<String, String> signupValidation(String username, String email){
+		Map<String, String> ud = new HashMap<>();
+		try{
+			PreparedStatement ps = connection.prepareStatement("SELECT * FROM " + "UserRegistry WHERE username=?");
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				ud.put("validUserName", "false");
+			}
+			else{
+				ud.put("validUserName", "true");
+			}
+			ps = connection.prepareStatement("SELECT * FROM UserRegistry WHERE email=?");
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			if(rs.next()){
+				ud.put("validEmail", "false");
+			}
+			else{
+				ud.put("validEmail", "true");
+			}
+			ps.close();
+		}catch (SQLException sqle) {
+			System.out.println("Sqle: " + sqle.getMessage());
+		}
+		return ud;
+	}
+
 	public static Map<String, String> signInValidation(String username, String pw) {
 		Map<String, String> userDetails = new HashMap<>();
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("SELECT * FROM " + "UserRegistry WHERE username=? and pw=?");
+					.prepareStatement("SELECT * FROM " + "UserRegistry WHERE username=? OR pw=?");
 
 			preparedStatement.setString(1, username);
 			preparedStatement.setString(2, pw);

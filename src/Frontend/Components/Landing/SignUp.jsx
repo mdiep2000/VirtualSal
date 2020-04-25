@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Form, Row, Col } from "react-bootstrap";
 import "../../App.css";
 import { Link } from "react-router-dom";
-
+import $ from "jquery";
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -59,13 +59,37 @@ class SignUp extends Component {
       return;
     }
     //VALIDATE AGAINST SQL DATABASE for Email/Username already taken
+    $.ajax({
+      url: "http://localhost:8080/VirtualSal/signupvalidation",
+      data: {
+        username: username,
+        password: password,
+        firstname: firstname,
+        email: email,
+        lastname: lastname
+      },
+      success: function (data) {
+        console.log(data);
+        if(data.validUsername==="false" || data.validEmail==="false"){
+          if(data.validUsername==="false"){
+            alert("Username has been taken");
+          }
+          if(data.validEmail==="false"){
+            alert("Email has been taken");
+          }
+          return;
+        }
+      }
+    });
+    /*
     validated = true; //only for testing purposes
     if (!validated) {
       alert("Username or Email already taken. Please try again.");
       event.preventDefault();
       event.stopPropagation();
       this.resetForm();
-    } else {
+    } 
+    else {
       //ADD NEW USER TO DATABASE
       //code goes here........................
       this.setState({
@@ -78,6 +102,8 @@ class SignUp extends Component {
       localStorage.setItem("username", username);
       alert("You are now signed up!");
     }
+    */
+   alert("You are now signed up");
   };
 
   render() {
