@@ -31,39 +31,42 @@ class SignIn extends Component {
         username: username,
         password: password,
       },
+      async: false,
       success: function (data) {
         console.log(data);
-        if (data === "{}") {
-          validated = false;
+        console.log(data.validSignIn);
+        if (data.validSignIn) {
+          //valid
+          const fname = data.name;
+          const lname = data.lastname;
+          const email = data.email;
+          const courses = data.courses;
+          localStorage.setItem("username", username);
+          localStorage.setItem("fullName", fname + " " + lname);
+          localStorage.setItem("email", email);
+          localStorage.setItem("courses", courses);
+          alert("You are now signed in!");
+        } else if (
+          data.validSignIn === "false" &&
+          data.validUsername === "true"
+        ) {
+          //invalid, yet correct username
+          alert("Incorrect Password. Please try again.");
+          event.preventDefault();
+          event.stopPropagation();
+          //reset form
+          document.getElementById("username").value = "";
         } else {
-          validated = true;
+          //invalid
+          alert("Incorrect Username and Password. Please try again.");
+          event.preventDefault();
+          event.stopPropagation();
+          //reset form
+          document.getElementById("username").value = "";
+          document.getElementById("password").value = "";
         }
       },
     });
-    if (!validated) {
-      alert("Incorrect Username or Password. Please try again.");
-      event.preventDefault();
-      event.stopPropagation();
-      //reset form
-      document.getElementById("username").value = "";
-      document.getElementById("password").value = "";
-    } else {
-      this.setState(
-        {
-          username: username,
-          password: password,
-        },
-        () =>
-          console.log(
-            "username: " +
-              this.state.username +
-              ", password: " +
-              this.state.password
-          )
-      );
-      localStorage.setItem("username", username);
-      alert("You are now signed in!");
-    }
   };
 
   render() {
