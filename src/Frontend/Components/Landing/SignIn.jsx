@@ -35,7 +35,7 @@ class SignIn extends Component {
       success: function (data) {
         console.log(data);
         console.log(data.validSignIn);
-        if (data.validSignIn) {
+        if (data.validSignIn==="true") {
           //valid
           const fname = data.name;
           const lname = data.lastname;
