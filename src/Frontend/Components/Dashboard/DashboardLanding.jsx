@@ -4,7 +4,7 @@ import Dashboard from "./Dashboard";
 import GuestDashboard from "./GuestDashboard";
 import Forums from "./Forums";
 import SearchResults from "../Search/SearchResults";
-import popularForums from "./popularForums.jsx";
+import { popularForums } from "./popularForums.jsx";
 
 class DashboardLanding extends Component {
   state = {
@@ -38,19 +38,17 @@ class DashboardLanding extends Component {
           <Route path="/dashboard/search-results">
             <SearchResults searchKey={this.state.searchKey} />
           </Route>
-          {
-            (popularForums.map = (forum) => (
-              <Route path={"/dashboard/forum-id=" + forum.id}>
-                <Forums
-                  key={forum.id}
-                  question={forum.question}
-                  upvotes={forum.upvotes}
-                  downvotes={forum.downvotes}
-                  thread={forum.thread}
-                />
-              </Route>
-            ))
-          }
+          {popularForums.map((forum) => (
+            <Route path={"/dashboard/forum-id=" + forum.id}>
+              <Forums
+                key={forum.id}
+                question={forum.question}
+                upvotes={forum.upvotes}
+                downvotes={forum.downvotes}
+                thread={forum.thread}
+              />
+            </Route>
+          ))}
         </Switch>
       </Router>
     );

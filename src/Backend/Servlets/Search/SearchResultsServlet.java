@@ -35,13 +35,16 @@ public class SearchResultsServlet extends HttpServlet {
 			SQL_Util.initConnection();
 			
 			//Parameter from frontend
-			String searchBarInput = request.getParameter("searchBarInput");
+			String searchBarInput = request.getParameter("searchKey");
 			
             // Multiple threads to return search from forums, reviews, courses
             SearchThread forumsThread = new SearchThread(searchBarInput, "forums", jsonStrings);
             SearchThread reviewsThread = new SearchThread(searchBarInput, "reviews", jsonStrings);
             SearchThread coursesThread = new SearchThread(searchBarInput, "courses", jsonStrings);
 			
+            String clientOrigin = request.getHeader("origin");
+            response.addHeader("Allow-Access-Control-Origin", clientOrigin);
+            
 			//Send to frontend [CONTAINS SYNTAX ERRORS]
             String json = new Gson().toJson(jsonStrings);
             response.setContentType("application/json");
