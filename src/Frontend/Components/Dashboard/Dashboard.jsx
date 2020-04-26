@@ -46,10 +46,10 @@ class Dashboard extends Component {
           <label className="moduleTitle">My Reviews</label>
         </div>
         <div className="reviewContainer">
-          <Link to="/dashboard/review">
-            <label className="reviewText">Review Courses</label>
+            <Link to="/dashboard/review">
+            <label className="reviewText">Review Courses</label>               
+            </Link>
             <Review />
-          </Link>
         </div>
         <div className="infoTitleContainer">
           <label className="moduleTitle">My Info</label>
