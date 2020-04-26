@@ -42,6 +42,7 @@ class Review extends Component {
         professor: this.state.professor,
       }
     });
+    alert("Review for " + this.state.course + " added!");
     return;
   };
   render() {
