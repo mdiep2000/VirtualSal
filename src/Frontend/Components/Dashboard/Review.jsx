@@ -78,7 +78,11 @@ class Review extends Component {
           </div>
 
           <div className="workload">
-            <select name="workload" value={this.state.workload}>
+            <select 
+              name="workload" 
+              value={this.state.workload}
+              onChange={(e) => this.change(e)}
+            >
               <option value="none" selected disabled hidden>
                 Workload
               </option>
