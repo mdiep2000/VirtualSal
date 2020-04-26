@@ -244,7 +244,7 @@ public class SQL_Util {
 	public static void addReview(String courseName, String professor, int workloadVal, int clarity, String comment) {
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(
-					"INSERT INTO " + "Answer(posterID, courseName, professor, workloadVal, clarity, comment) "
+					"INSERT INTO " + "Review(posterID, courseName, professor, workloadVal, clarity, comment) "
 							+ "VALUES(?,?,?,?,?,?)");
 
 			preparedStatement.setInt(1, currentUserId);
