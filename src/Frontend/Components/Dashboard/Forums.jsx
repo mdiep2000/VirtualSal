@@ -109,11 +109,11 @@ class Forums extends Component {
         <div className="commentFormat">
           <h5 className="answerFormat">{t.comment}</h5>
           <p>
-            <button className = "buttonFormat" onClick={() => this.voteApprove(t.key)}>
+            <button className = "buttonFormat_yes" onClick={() => this.voteApprove(t.key)}>
             <span style={{color:"green"}}>Approve</span>
             </button>{"         "}
             <span className="numLikes">{t.upvotes}</span>{" "}
-           <button className = "buttonFormat" onClick={() => this.voteDisapprove(t.key)}>
+           <button className = "buttonFormat_no" onClick={() => this.voteDisapprove(t.key)}>
            <span style={{color: "red"}}>Disapprove</span>
            </button> {" "}
            <span className="numDisLikes">{t.downvotes}</span>
@@ -129,7 +129,7 @@ class Forums extends Component {
         <h1 className="questionFormat">{this.props.question}</h1>
         <form onSubmit={this.handlesubmit}>
         <div className="form-group w-50">
-          <label for="comment">Reply:</label>
+          <label for="comment"><font color="white">Reply:</font></label>
           <textarea className="form-control" rows="3" id="comment" name="reply" value={this.state.reply} onChange={this.onchange}></textarea>
         </div>
         <div className="submit">

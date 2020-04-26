@@ -27,10 +27,24 @@
     margin-left: 5%;
 }
 
-.buttonFormat{
+.buttonFormat_yes{
     width: 10em;
     height: 1.8em;
     font-size: 1.5em;
     
+}
+
+.buttonFormat_yes:hover{
+    background-color: aquamarine;
+}
+
+.buttonFormat_no{
+    width: 10em;
+    height: 1.8em;
+    font-size: 1.5em;
+}
+
+.buttonFormat_no:hover{
+    background-color: rgb(255,160,122);
 }
 

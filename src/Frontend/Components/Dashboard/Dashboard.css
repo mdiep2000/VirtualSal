@@ -148,6 +148,10 @@
   overflow-x: hidden;
 }
 
+.guestSearchButton:hover{
+  background-color: 	rgb(178,34,34);
+}
+
 .userSearchButton {
   text-align: start;
   font-size: 0.4em;
@@ -157,6 +161,10 @@
   background-color: rgb(78, 5, 5);
   color: white;
   overflow-x: hidden;
+}
+
+.userSearchButton:hover{
+  background-color: 	rgb(178,34,34);
 }
 
 .guestHeader {
