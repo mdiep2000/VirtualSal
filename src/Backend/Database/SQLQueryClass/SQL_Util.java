@@ -1,7 +1,7 @@
-package Backend.Database.SQLQueryClass;
+package Database.SQLQueryClass;
 
-import Backend.Servlets.Questions.*;
-import Backend.Servlets.Review.*;
+import Servlets.Questions.*;
+import Servlets.Review.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class SQL_Util {
 
 	// SET YOUR WORKBENCH LOGIN
-	static String pass = "root";
+	static String pass = "queminh1";
 	static String userName = "root";
 	public static final String CREDENTIALS_STRING = "jdbc:mysql://localhost:3306/FinalProject?user=" + userName
 			+ "&password=" + pass
@@ -86,7 +86,6 @@ public class SQL_Util {
 			preparedStatement.setString(4, courseName);
 			preparedStatement.setString(5, professorName);
 			preparedStatement.setInt(6, sectionNumber);
-
 			preparedStatement.execute();
 			preparedStatement.close();
 
@@ -146,7 +145,6 @@ public class SQL_Util {
 				int questionID = rs.getInt("questionID");
 				String questionTitle = rs.getString("questionTitle");
 				String questionBody = rs.getString("questionBody");
-
 				question.setValid(true);
 				question.setCourseName(courseName);
 				question.setPosterID(posterID);
@@ -156,12 +154,12 @@ public class SQL_Util {
 				// This is where I would need to get the answers associated with the question ID
 				// GetAnswer returns an arrayList of answers
 				question.answerThread = getAnswer(questionID, posterID);
-				preparedStatement.close();
-
 			}
+			preparedStatement.close();
 		} catch (SQLException sqle) {
 			System.out.println("Sqle: " + sqle.getMessage());
 		}
+		
 		return question;
 	}
 
@@ -327,7 +325,6 @@ public class SQL_Util {
 
 				}
 				preparedStatement.close();
-
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Sqle: " + sqle.getMessage());
@@ -389,7 +386,7 @@ public class SQL_Util {
 		Map<String, String> courseDetails = new HashMap<>();
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("SELECT * FROM CourseRegistry WHERE courseName=?");
+					.prepareStatement("SELECT * FROM CourseRegistry WHERE courseName LIKE \'%\' ? \'%\'");
 			preparedStatement.setString(1, courseName);
 
 			// since we are geting information back we need to use result set to capture
@@ -474,11 +471,9 @@ public class SQL_Util {
 			preparedStatement = connection.prepareStatement(
 					"SELECT * FROM Review r, UserRegistry u WHERE professor=? AND r.posterID = u.userID");
 			preparedStatement.setString(1, professorName);
-
 			// since we are geting information back we need to use result set to capture
 			// data
 			resultSet = preparedStatement.executeQuery();
-
 			while (resultSet.next()) {
 				String comment = resultSet.getString("comment");
 				int workload = resultSet.getInt("workloadVal");
@@ -496,7 +491,6 @@ public class SQL_Util {
 
 				// System.out.println(comment+ " "+workload+" "+clarity+" "+studentName+"
 				// "+courseName);
-
 			}
 
 			preparedStatement.close();

@@ -7,30 +7,40 @@
 .answerFormat{
     font-size: 1.25em;
     font-family: "Raleway";
+    position:relative;
+    padding: 1.5%;
 }
 
 .numLikes{
     color: green;
     font-size: 1.1em;
-
+    position:relative;
+    left:25%;
 }
 
 
 .numDisLikes{
     color: red;
     font-size: 1.1em;
+    position:relative;
+    left:25%;
 }
 
 .commentFormat{
-    background-color: rgb(192, 173, 62);
+    background-color: rgba(255, 255, 255, 0.603);
     width: 70%;
-    margin-left: 5%;
+    margin-left: 15%;
+    border-radius: 5px;
 }
 
 .buttonFormat_yes{
     width: 10em;
     height: 1.8em;
-    font-size: 1.5em;
+    font-size: 1.2em;
+    position:relative;
+    left:25%;
+    border-radius: 5px;
+    margin-bottom: 1%;
     
 }
 
@@ -41,10 +51,28 @@
 .buttonFormat_no{
     width: 10em;
     height: 1.8em;
-    font-size: 1.5em;
+    font-size: 1.2em;
+    position:relative;
+    left:25%;
+    border-radius: 5px;
+    margin-bottom: 1%;
 }
 
 .buttonFormat_no:hover{
     background-color: rgb(255,160,122);
 }
 
+.reply{
+    position:relative;
+    left:45%;
+}
+
+.form-control{
+    position:relative;
+    left:45%;
+}
+
+.submit{
+    position: relative;
+  left: 40%;
+}

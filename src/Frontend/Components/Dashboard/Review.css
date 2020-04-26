@@ -1,9 +1,17 @@
 .header {
   color: white;
-  font-size: 1.4em;
+  font-size: 1.2em;
   font-family: "Raleway";
   text-align: justify;
   margin-top: 2%;
+}
+.title{
+  color: white;
+  font-size: 1.2em;
+  font-family: "Raleway";
+  text-align: justify;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
 }
 
 .course {
@@ -14,6 +22,7 @@
 .professor {
   margin-bottom: 2%;
   margin-left: 0.8%;
+  border-radius: 5px;
 }
 
 .clarification {

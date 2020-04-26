@@ -1,9 +1,13 @@
-package Backend.Servlets.Search;
+package Servlets.Search;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import Database.SQLQueryClass.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import Backend.Database.SQLQueryClass.SQL_Util;
-import Backend.Servlets.Questions.QuestionClass;
-import Backend.Servlets.Review.Review;
+import Database.SQLQueryClass.SQL_Util;
+import Servlets.Questions.QuestionClass;
+import Servlets.Review.Review;
 
 
 @WebServlet("/SearchResultsServlet")
@@ -36,16 +40,26 @@ public class SearchResultsServlet extends HttpServlet {
 			
 			//Parameter from frontend
 			String searchBarInput = request.getParameter("searchKey");
-			
+						
+			ExecutorService executor = Executors.newCachedThreadPool();
             // Multiple threads to return search from forums, reviews, courses
             SearchThread forumsThread = new SearchThread(searchBarInput, "forums", jsonStrings);
+            executor.execute(forumsThread);
             SearchThread reviewsThread = new SearchThread(searchBarInput, "reviews", jsonStrings);
+            executor.execute(reviewsThread);
             SearchThread coursesThread = new SearchThread(searchBarInput, "courses", jsonStrings);
-			
+            executor.execute(coursesThread);
+            
+            executor.shutdown();
+    		while(!executor.isTerminated()) 
+    		{
+    			Thread.yield();
+    		}
+            	
             String clientOrigin = request.getHeader("origin");
             response.addHeader("Allow-Access-Control-Origin", clientOrigin);
             
-			//Send to frontend [CONTAINS SYNTAX ERRORS]
+			//Send to frontend 
             String json = new Gson().toJson(jsonStrings);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
@@ -81,14 +95,20 @@ class SearchThread extends Thread
         {
             QuestionClass q = SQL_Util.getQuestionAnswers(searchBarInput);
             String question = new Gson().toJson(q);
-            jsonStrings.add(question);
+            if(q.isValid() == true)
+            {
+            	jsonStrings.add(question);
+            }
         }
         // Find Review
         else if(searchType.equals("reviews"))
         {
             Review pr = SQL_Util.getReview(searchBarInput);
             String professorReview = new Gson().toJson(pr);
-            jsonStrings.add(professorReview);
+            if(!pr.reviewList.isEmpty())
+            {
+            	jsonStrings.add(professorReview);
+            }
         }
         // Find Course
         else if(searchType.equals("courses"))
@@ -96,7 +116,10 @@ class SearchThread extends Thread
             Map<String, String> data = new HashMap<>();
             data = SQL_Util.getCourseDetails(searchBarInput);
             String json = new Gson().toJson(data);
-            jsonStrings.add(json);
+            if(!data.isEmpty())
+            {
+            	jsonStrings.add(json);
+            }
         }
     }
 }
