@@ -31,7 +31,7 @@ public class signUpValidation extends HttpServlet {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         data = SQL_Util.signupValidation(username, email);
-        if(data.get("validUsername").equals("true") && data.get("validEmail").equals("true")){
+        if(data.get("validUserName").equals("true") && data.get("validEmail").equals("true")){
         	String firstname = request.getParameter("firstname");
         	String lastname = request.getParameter("lastname");
         	String pw = request.getParameter("password");
