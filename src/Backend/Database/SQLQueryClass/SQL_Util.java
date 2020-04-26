@@ -135,7 +135,7 @@ public class SQL_Util {
 		QuestionClass question = new QuestionClass();
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("SELECT * FROM " + "Question WHERE CONTAINS (questionBody, ?)");
+					.prepareStatement("SELECT * FROM " + "Question WHERE questionBody LIKE \'%\' ? \'%\'");
 
 			preparedStatement.setString(1, keyword);
 
