@@ -122,27 +122,55 @@ class SignUp extends Component {
         <Form>
           <Row>
             <Form.Group as={Col} controlId="firstname">
-              <Form.Control type="text" placeholder="FIRST NAME" />
+              <Form.Control
+                type="text"
+                placeholder="FIRST NAME"
+                style={{ left: "0%" }}
+              />
             </Form.Group>
             <Form.Group as={Col} controlId="lastname">
-              <Form.Control type="text" placeholder="LAST NAME" />
+              <Form.Control
+                type="text"
+                placeholder="LAST NAME"
+                style={{ left: "0%" }}
+              />
             </Form.Group>
           </Row>
 
           <Form.Group controlId="email">
-            <Form.Control type="text" placeholder="EMAIL" required />
+            <Form.Control
+              type="text"
+              placeholder="EMAIL"
+              required
+              style={{ left: "0%" }}
+            />
             <Form.Text style={{ color: "white" }}>
               We'll never share your email with anyone else.
             </Form.Text>
           </Form.Group>
           <Form.Group controlId="username">
-            <Form.Control type="text" placeholder="USERNAME" required />
+            <Form.Control
+              type="text"
+              placeholder="USERNAME"
+              required
+              style={{ left: "0%" }}
+            />
           </Form.Group>
           <Form.Group controlId="password">
-            <Form.Control type="text" placeholder="PASSWORD" required />
+            <Form.Control
+              type="text"
+              placeholder="PASSWORD"
+              required
+              style={{ left: "0%" }}
+            />
           </Form.Group>
           <Form.Group controlId="confirmPassword">
-            <Form.Control type="text" placeholder="CONFIRM PASSWORD" required />
+            <Form.Control
+              type="text"
+              placeholder="CONFIRM PASSWORD"
+              required
+              style={{ left: "0%" }}
+            />
           </Form.Group>
           <Link
             to="/uploadSchedule"

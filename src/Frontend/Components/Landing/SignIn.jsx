@@ -35,7 +35,7 @@ class SignIn extends Component {
       success: function (data) {
         console.log(data);
         console.log(data.validSignIn);
-        if (data.validSignIn==="true") {
+        if (data.validSignIn === "true") {
           //valid
           const fname = data.name;
           const lname = data.lastname;
@@ -77,13 +77,20 @@ class SignIn extends Component {
         <br />
         <Form>
           <Form.Group controlId="username">
-            <Form.Control type="text" placeholder="USERNAME" required />
-            {/* <Form.Text style={{ color: "white" }}>
-              We'll never share your email with anyone else.
-            </Form.Text> */}
+            <Form.Control
+              type="text"
+              placeholder="USERNAME"
+              required
+              style={{ left: "0%" }}
+            />
           </Form.Group>
           <Form.Group controlId="password">
-            <Form.Control type="password" placeholder="PASSWORD" required />
+            <Form.Control
+              type="password"
+              placeholder="PASSWORD"
+              required
+              style={{ left: "0%" }}
+            />
           </Form.Group>
           <Link
             to="/dashboard"
