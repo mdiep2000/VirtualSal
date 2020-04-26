@@ -1,10 +1,22 @@
 import React, { Component } from "react";
 import Course from "./Course.jsx";
+import $ from "jquery";
 class Schedule extends Component {
   state = {
     courseList: [],
   };
+  componentDidMount(){
+    $.ajax({
+      url: "http://localhost:8080/VirtualSal/MyScheduleServlet",
+      success: function(data){
+        this.setState({
+          courseList: data
+        })
+      }
+    });
+  }
   render() {
+    /*
     const sampleSchedule = [
       {
         semester: "Spring",
@@ -22,15 +34,15 @@ class Schedule extends Component {
         sectionNumber: "30231",
       },
     ];
+    */
     // const courses = this.state.courseList.map((course) => (
-    const courses = sampleSchedule.map((
+    const courses = this.state.courseList.map((
       course //replace this line with above line
     ) => (
       <div>
         <Course
           key={course.sectionNumber}
           semester={course.semester}
-          year={course.year}
           courseName={course.courseName}
           professor={course.professor}
           sectionNumber={course.sectionNumber}

@@ -31,7 +31,8 @@ public class MyScheduleServlet extends HttpServlet {
     ---IN THE FRONTEND CHECK IF VALID EQUALS TO STRING "true".
     **/
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
+			String clientOrigin = request.getHeader("origin");
+			response.setHeader("Access-Control-Allow-Origin", clientOrigin);
 		
 			//Ensure connection with database is established
 			SQL_Util.initConnection();
@@ -47,6 +48,8 @@ public class MyScheduleServlet extends HttpServlet {
 			
 						
 			//Send to frontend
+			String clientOrigin = request.getHeader("origin");
+            response.setHeader("Access-Control-Allow-Origin", clientOrigin);
 			String json = new Gson().toJson(userSchedule);
 		    response.setContentType("application/json");
 		    response.setCharacterEncoding("UTF-8");

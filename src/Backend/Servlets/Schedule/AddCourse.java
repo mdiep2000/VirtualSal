@@ -63,6 +63,8 @@ public class AddCourse extends HttpServlet {
 			}
 						
 			//Notify frontend
+			String clientOrigin = request.getHeader("origin");
+			response.setHeader("Access-Control-Allow-Origin", clientOrigin);
 			response.setContentType("text/plain");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(check);
