@@ -40,9 +40,7 @@ public class SearchResultsServlet extends HttpServlet {
 			
 			//Parameter from frontend
 			String searchBarInput = request.getParameter("searchKey");
-			
-			System.out.println(searchBarInput);
-			
+						
 			ExecutorService executor = Executors.newCachedThreadPool();
             // Multiple threads to return search from forums, reviews, courses
             SearchThread forumsThread = new SearchThread(searchBarInput, "forums", jsonStrings);
@@ -57,9 +55,7 @@ public class SearchResultsServlet extends HttpServlet {
     		{
     			Thread.yield();
     		}
-            
-            System.out.println("Strings: " + jsonStrings);
-            			
+            	
             String clientOrigin = request.getHeader("origin");
             response.addHeader("Allow-Access-Control-Origin", clientOrigin);
             
@@ -98,7 +94,6 @@ class SearchThread extends Thread
         if(searchType.equals("forums"))
         {
             QuestionClass q = SQL_Util.getQuestionAnswers(searchBarInput);
-            System.out.println("FSQL");
             String question = new Gson().toJson(q);
             if(q.isValid() == true)
             {
@@ -109,7 +104,6 @@ class SearchThread extends Thread
         else if(searchType.equals("reviews"))
         {
             Review pr = SQL_Util.getReview(searchBarInput);
-            System.out.println("RSQL");
             String professorReview = new Gson().toJson(pr);
             if(!pr.reviewList.isEmpty())
             {
@@ -121,7 +115,6 @@ class SearchThread extends Thread
         {
             Map<String, String> data = new HashMap<>();
             data = SQL_Util.getCourseDetails(searchBarInput);
-            System.out.println("SSQL");
             String json = new Gson().toJson(data);
             if(!data.isEmpty())
             {
