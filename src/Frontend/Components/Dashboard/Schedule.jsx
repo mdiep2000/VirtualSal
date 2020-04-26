@@ -2,18 +2,29 @@ import React, { Component } from "react";
 import Course from "./Course.jsx";
 import $ from "jquery";
 class Schedule extends Component {
-  state = {
-    courseList: [],
-  };
+  constructor(props){
+    super(props);
+    this.state={
+      courseList: {
+        details : [],
+        valid:"",
+      },
+    }
+    
+  }
   componentDidMount(){
     $.ajax({
       url: "http://localhost:8080/VirtualSal/MyScheduleServlet",
+      dataType: 'json',
+      async: false,
       success: function(data){
+        console.log(data);
         this.setState({
           courseList: data
-        })
-      }
+        });
+      }.bind(this)
     });
+    console.log(this.state.courseList);
   }
   render() {
     /*
@@ -36,7 +47,7 @@ class Schedule extends Component {
     ];
     */
     // const courses = this.state.courseList.map((course) => (
-    const courses = this.state.courseList.map((
+    const courses = this.state.courseList.details.map((
       course //replace this line with above line
     ) => (
       <div>
