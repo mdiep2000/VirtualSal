@@ -103,21 +103,21 @@ class UploadSchedule extends Component {
         <Form>
           <Row>
             <Form.Group as={Col} controlId="semester">
-              <Form.Control type="text" placeholder="SEMESTER" />
+              <Form.Control type="text" placeholder="SEMESTER" style={{ left: "0%" }}/>
             </Form.Group>
             <Form.Group as={Col} controlId="year">
-              <Form.Control type="text" placeholder="YEAR" />
+              <Form.Control type="text" placeholder="YEAR" style={{ left: "0%" }}/>
             </Form.Group>
           </Row>
 
           <Form.Group controlId="courseName">
-            <Form.Control type="text" placeholder="COURSE NAME" required />
+            <Form.Control type="text" placeholder="COURSE NAME" required style={{ left: "0%" }}/>
           </Form.Group>
           <Form.Group controlId="professor">
-            <Form.Control type="text" placeholder="PROFESSOR" required />
+            <Form.Control type="text" placeholder="PROFESSOR" required style={{ left: "0%" }}/>
           </Form.Group>
           <Form.Group controlId="sectionNumber">
-            <Form.Control type="text" placeholder="SECTION NUMBER" required />
+            <Form.Control type="text" placeholder="SECTION NUMBER" required style={{ left: "0%" }}/>
           </Form.Group>
           <Row>
             <Col>
