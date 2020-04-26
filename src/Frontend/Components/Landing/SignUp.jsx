@@ -61,25 +61,32 @@ class SignUp extends Component {
     //VALIDATE AGAINST SQL DATABASE for Email/Username already taken
     $.ajax({
       url: "http://localhost:8080/VirtualSal/signupvalidation",
+      async: false,
       data: {
         username: username,
         password: password,
         firstname: firstname,
         email: email,
-        lastname: lastname
+        lastname: lastname,
       },
       success: function (data) {
         console.log(data);
-        if(data.validUsername==="false" || data.validEmail==="false"){
-          if(data.validUsername==="false"){
-            alert("Username has been taken");
+        if (data.validUsername === "false" || data.validEmail === "false") {
+          if (data.validUsername === "false" || data.validEmail === "false") {
+            alert("Both the username and password have already been taken.");
+          } else if (data.validUsername === "false") {
+            alert("Username has been taken.");
+          } else if (data.validEmail === "false") {
+            alert("Email has been taken.");
           }
-          if(data.validEmail==="false"){
-            alert("Email has been taken");
-          }
+          event.preventDefault();
+          event.stopPropagation();
           return;
         }
-      }
+        localStorage.setItem("username", username);
+        localStorage.setItem("fullName", firstname + " " + lastname);
+        localStorage.setItem("email", email);
+      },
     });
     /*
     validated = true; //only for testing purposes
@@ -103,7 +110,7 @@ class SignUp extends Component {
       alert("You are now signed up!");
     }
     */
-   alert("You are now signed up");
+    alert("You are now signed up");
   };
 
   render() {

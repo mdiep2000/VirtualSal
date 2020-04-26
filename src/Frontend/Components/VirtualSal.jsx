@@ -24,26 +24,28 @@ class VirtualSal extends Component {
       <Router basename={process.env.REACT_APP_ROUTER_BASE || ""}>
         <div className="AppContainer">
           <Navbar />
-          <Switch>
-            <Route exact path="/">
-              <Landing />
-            </Route>
-            <Route path="/signin">
-              <SignIn />
-            </Route>
-            <Route path="/signup">
-              <SignUp />
-            </Route>
-            <Route path="/uploadSchedule">
-              <UploadSchedule />
-            </Route>
-            <Route path="/dashboard">
-              <DashboardLanding />
-            </Route>
-            <Route path="/info">
-              <Info />
-            </Route>
-          </Switch>
+          <div className="AppContentContainer">
+            <Switch>
+              <Route exact path="/">
+                <Landing />
+              </Route>
+              <Route path="/signin">
+                <SignIn />
+              </Route>
+              <Route path="/signup">
+                <SignUp />
+              </Route>
+              <Route path="/uploadSchedule">
+                <UploadSchedule />
+              </Route>
+              <Route path="/dashboard">
+                <DashboardLanding />
+              </Route>
+              <Route path="/info">
+                <Info />
+              </Route>
+            </Switch>
+          </div>
         </div>
       </Router>
     );

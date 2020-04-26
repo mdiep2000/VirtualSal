@@ -4,99 +4,97 @@ import Forums from "../Dashboard/Forums";
 import Course from "../Dashboard/Course";
 import Review from "../Dashboard/Review";
 import "./Search.css";
+import $ from "jquery";
 
-/*Ahmed, I'm gonna pass the search key in as a prop, so once this page renders we can query backend which will return list of results.
-You can display these however you want, but I assume theyll have name and link to page*/
+// var exampleList = [
+//   {
+//     type: "forum",
+//     id: 1,
+//     data: {
+//       question: "what's up?",
+//       upvotes: 5,
+//       downvotes: 4,
+//       thread: [
+//         {
+//           key: 1,
+//           comment: "nothing much",
+//           upvotes: 3,
+//           downvotes: 2,
+//           voteYes: false,
+//           voteNo: false,
+//         },
 
-var exampleList = [
-  {
-    type: "forum",
-    id: 1,
-    data: {
-      question: "what's up?",
-      upvotes: 5,
-      downvotes: 4,
-      thread: [
-        {
-          key: 1,
-          comment: "nothing much",
-          upvotes: 3,
-          downvotes: 2,
-          voteYes: false,
-          voteNo: false,
-        },
-
-        {
-          key: 2,
-          comment: "test",
-          upvotes: 0,
-          downvotes: 3,
-          voteYes: false,
-          voteNo: false,
-        },
-      ],
-    },
-  },
-  {
-    type: "review",
-    id: 2,
-    data: {
-      course: "CSCI-104 Data Structures and Object Oriented Programming",
-      professor: "cote",
-      workload: 3,
-      clarity: 4,
-      comment: "good prof",
-    },
-  },
-  {
-    type: "forum",
-    id: 3,
-    data: {
-      question: "other exanoke?",
-      upvotes: 5,
-      downvotes: 4,
-      thread: [
-        {
-          key: 3,
-          comment: "example ",
-          upvotes: 1,
-          downvotes: 3,
-          voteYes: false,
-          voteNo: false
-        },
-        {
-          comment: "example ",
-          upvotes: 3,
-          downvotes: 1,
-          voteYes: false,
-          voteNo: false
-        },
-      ],
-    },
-  },
-  {
-    type: "course",
-    id: 4,
-    data: {
-      semester: "Spring",
-      year: "2020",
-      course: "CSCI201 - Principles of Software Development",
-      professor: "Jeffery Miller",
-      sectionNumber: "30112",
-    },
-  },
-  {
-    type: "course",
-    id: 5,
-    data: {
-      semester: "Spring",
-      year: "2020",
-      course: "CSCI270 - Introduction to Algorithms and Theory of Computing",
-      professor: "Shahrair Shamsian",
-      sectionNumber: "30231",
-    },
-  },
-];
+//         {
+//           key: 2,
+//           comment: "test",
+//           upvotes: 0,
+//           downvotes: 3,
+//           voteYes: false,
+//           voteNo: false,
+//         },
+//       ],
+//     },
+//   },
+//   {
+//     type: "review",
+//     id: 2,
+//     data: {
+//       course: "CSCI-104 Data Structures and Object Oriented Programming",
+//       professor: "cote",
+//       workload: 3,
+//       clarity: 4,
+//       comment: "good prof",
+//     },
+//   },
+//   {
+//     type: "forum",
+//     id: 3,
+//     data: {
+//       question: "other exanoke?",
+//       upvotes: 5,
+//       downvotes: 4,
+//       thread: [
+//         {
+//           key: 3,
+//           comment: "example ",
+//           upvotes: 1,
+//           downvotes: 3,
+//           voteYes: false,
+//           voteNo: false,
+//         },
+//         {
+//           comment: "example ",
+//           upvotes: 3,
+//           downvotes: 1,
+//           voteYes: false,
+//           voteNo: false,
+//         },
+//       ],
+//     },
+//   },
+//   {
+//     type: "course",
+//     id: 4,
+//     data: {
+//       semester: "Spring",
+//       year: "2020",
+//       course: "CSCI201 - Principles of Software Development",
+//       professor: "Jeffery Miller",
+//       sectionNumber: "30112",
+//     },
+//   },
+//   {
+//     type: "course",
+//     id: 5,
+//     data: {
+//       semester: "Spring",
+//       year: "2020",
+//       course: "CSCI270 - Introduction to Algorithms and Theory of Computing",
+//       professor: "Shahrair Shamsian",
+//       sectionNumber: "30231",
+//     },
+//   },
+// ];
 
 class SearchResults extends Component {
   state = {
@@ -110,13 +108,22 @@ class SearchResults extends Component {
       },
     ],
   };
+
   componentDidMount = () => {
+    this.setState({ searchKey: this.props.searchKey });
     //called once page renders
     /*process the search key here (this.props.searchKey) and grab
     other needed information from backend*/
-    this.setState({
-      searchKey: this.props.searchKey,
-      resultsList: exampleList, //for testing purpose
+    $.ajax({
+      url: "http://localhost:8080/VirtualSal/SearchResultsServlet",
+      data: {
+        searchKey: this.props.searchKey,
+      },
+      async: false,
+      success: function (data) {
+        console.log(data);
+        this.setState({ resultsList: data });
+      },
     });
   };
 
@@ -137,12 +144,19 @@ class SearchResults extends Component {
 
   handleSearch = () => {
     //query backend
-    this.setState(
-      { searchKey: this.state.searchBarInput },
-      alert("searching for: " + this.state.searchBarInput) //just for testing
-    );
+    this.setState({ searchKey: this.state.searchBarInput });
+    $.ajax({
+      url: "http://localhost:8080/VirtualSal/SearchResultsServlet",
+      data: {
+        searchKey: this.state.searchBarInput,
+      },
+      async: false,
+      success: function (data) {
+        console.log(data);
+        this.setState({ resultsList: data });
+      },
+    });
   };
-  
 
   render() {
     const searchLinks = this.state.resultsList.map((result) => (
@@ -203,10 +217,6 @@ class SearchResults extends Component {
         );
       }
     });
-    // console.log("searchLinks");
-    // console.log(searchLinks);
-    // console.log("searchPaths");
-    // console.log(searchPaths);
     return (
       <Router>
         <Switch>

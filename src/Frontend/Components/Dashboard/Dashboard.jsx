@@ -64,7 +64,7 @@ class Dashboard extends Component {
           {popularForums.map((forum) => (
             <div className="popularForumLink">
               <Link
-                to={"dashboard/forum-id=" + forum.id}
+                to={"/dashboard/forum-id=" + forum.id}
                 style={{ color: "white" }}
               >
                 {forum.question}
