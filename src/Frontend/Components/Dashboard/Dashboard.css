@@ -97,6 +97,8 @@
 .moduleTitle {
   color: rgb(37, 37, 37);
   font-family: "Raleway";
+  margin-top: -2%;
+  font-weight: 700;
 }
 
 .welcomeText {
@@ -153,7 +155,7 @@
 }
 
 .userSearchButton {
-  text-align: start;
+  text-align: center;
   font-size: 0.4em;
   width: 10%;
   height: 7em;
@@ -196,4 +198,16 @@
   margin: 5%;
   font-family: "Raleway";
   font-size: 1em;
+  background-color: rgba(253, 253, 253, 0.377);
+  border-radius: 5px;
+  position:relative;
+  left:2px;
+}
+
+.popularForumLink:hover {
+  margin: 5%;
+  font-family: "Raleway";
+  font-size: 1em;
+  background-color: rgba(184, 36, 10, 0.486);
+  border-radius: 5px;
 }

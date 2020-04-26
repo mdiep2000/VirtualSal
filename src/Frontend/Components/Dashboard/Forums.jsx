@@ -127,14 +127,18 @@ class Forums extends Component {
     return (
       <div>
         <h1 className="questionFormat">{this.props.question}</h1>
+        <br></br>
         <form onSubmit={this.handlesubmit}>
         <div className="form-group w-50">
-          <label for="comment"><font color="white">Reply:</font></label>
+          <div className="reply">
+            <h5><font color="white">Your Reply:</font></h5>
+          </div>
           <textarea className="form-control" rows="3" id="comment" name="reply" value={this.state.reply} onChange={this.onchange}></textarea>
         </div>
         <div className="submit">
-            <input type="submit" value="Post Reply" />
+            <input type="submit" value="Post Reply" style={{margin: 10}}/>
         </div>
+        <br></br>
         </form>
         {threads}
       </div>

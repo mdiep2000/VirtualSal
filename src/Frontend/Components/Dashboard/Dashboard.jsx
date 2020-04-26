@@ -47,7 +47,7 @@ class Dashboard extends Component {
         </div>
         <div className="reviewContainer">
           <Link to="/dashboard/review">
-            <button className="reviewText">Review Courses</button>
+            <label className="reviewText">Review Courses</label>
             <Review />
           </Link>
         </div>
