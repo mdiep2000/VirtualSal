@@ -62,7 +62,10 @@ public class SQL_Util {
 			PreparedStatement ps = connection.prepareStatement("SELECT userID from UserRegistry WHERE username=?");
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
-			currentUserId = rs.getInt("userID");
+			while(rs.next()){
+				currentUserId = rs.getInt("userID");
+				System.out.println("Current user id == " +  currentUserId );
+			}
 
 		} catch (SQLException sqle) {
 			System.out.println("Sqle: " + sqle.getMessage());

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Form, Row, Col } from "react-bootstrap";
 import "../../App.css";
 import "./Landing.css";
+import $ from "jquery";
 
 class Course {
   //used to store form info
@@ -56,6 +57,7 @@ class UploadSchedule extends Component {
 
   handleSubmission = () => {
     //for testing, delete later
+    /*
     this.state.courseList.map((course) =>
       console.log(
         course.courseName +
@@ -69,7 +71,23 @@ class UploadSchedule extends Component {
           course.sectionNumber
       )
     );
-    /* send these courses to database*/
+    */
+   this.state.courseList.map((t) => (
+     $.ajax({
+      url: "http://localhost:8080/VirtualSal/AddCourse",
+       data: {
+         courseName: t.courseName,
+         sectionNumber: t.sectionNumber,
+         professor: t.professor,
+         year: t.year,
+         semester: t.semester
+       },
+       success: function(data){
+         console.log(data);
+         return
+       }
+     })
+   ));
   };
 
   render() {
