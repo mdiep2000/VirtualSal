@@ -399,6 +399,7 @@ public class SQL_Util {
 				int sectionNumber = resultSet.getInt("sectionNumber");
 				String professorName = resultSet.getString("professorName");
 
+				courseDetails.put("type", "course");
 				courseDetails.put("valid", "true");
 				courseDetails.put("semester", semester);
 				courseDetails.put("sectionNumber", String.valueOf(sectionNumber));

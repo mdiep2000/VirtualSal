@@ -25,7 +25,7 @@ import Servlets.Review.Review;
 @WebServlet("/SearchResultsServlet")
 public class SearchResultsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    Map<String, String> jsonStrings = new HashMap<>();
+
 
     public SearchResultsServlet() {
         super();
@@ -35,11 +35,15 @@ public class SearchResultsServlet extends HttpServlet {
     //response sends data back to web page
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
+		Vector<Map<String, String>> jsonStrings = new Vector<Map<String, String>>();	
+		
+			
 			//Ensure connection with database is established
 			SQL_Util.initConnection();
 			
 			//Parameter from frontend
 			String searchBarInput = request.getParameter("searchKey");
+			System.out.println(searchBarInput);
 						
 			ExecutorService executor = Executors.newCachedThreadPool();
             // Multiple threads to return search from forums, reviews, courses
@@ -64,7 +68,8 @@ public class SearchResultsServlet extends HttpServlet {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
-	}
+            System.out.println(jsonStrings);
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -79,9 +84,9 @@ class SearchThread extends Thread
 {
     String searchBarInput;
     String searchType;
-    Map<String, String> jsonStrings;
+    Vector<Map<String,String>> jsonStrings;
 
-    public SearchThread(String searchBarInput, String searchType, Map<String, String> jsonStrings)
+    public SearchThread(String searchBarInput, String searchType, Vector<Map<String, String>> jsonStrings)
     {
         this.searchBarInput = searchBarInput;
         this.searchType = searchType;
@@ -93,32 +98,45 @@ class SearchThread extends Thread
         // Find Forum
         if(searchType.equals("forums"))
         {
+        	Map<String,String> map = new HashMap<>();
             QuestionClass q = SQL_Util.getQuestionAnswers(searchBarInput);
             String question = new Gson().toJson(q);
+            String type = "forum";
             if(q.isValid() == true)
             {
-            	jsonStrings.put("forum", question);
+            	map.put("type", type);
+            	map.put("id", "1");
+            	map.put("data", question);
+            	jsonStrings.add(map);
             }
         }
         // Find Review
         else if(searchType.equals("reviews"))
         {
+        	Map<String,String> map = new HashMap<>();
             Review pr = SQL_Util.getReview(searchBarInput);
             String professorReview = new Gson().toJson(pr);
             if(!pr.reviewList.isEmpty())
             {
-            	jsonStrings.put("review", professorReview);
+            	map.put("type", "review");
+            	map.put("id", "2");
+            	map.put("data", professorReview);
+            	jsonStrings.add(map);
             }
         }
         // Find Course
         else if(searchType.equals("courses"))
         {
+        	Map<String,String> map = new HashMap<>();
             Map<String, String> data = new HashMap<>();
             data = SQL_Util.getCourseDetails(searchBarInput);
             String json = new Gson().toJson(data);
             if(!data.isEmpty())
             {
-            	jsonStrings.put("course", json);
+            	map.put("type", "course");
+            	map.put("id", "3");
+            	map.put("data", json);
+            	jsonStrings.add(map);
             }
         }
     }
