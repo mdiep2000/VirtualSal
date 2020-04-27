@@ -44,45 +44,47 @@ class Question extends Component {
     }
 
     render(){
-        return(
+    return(
         <div className="col-md-6">
+        <h1 className="titleFormat">Ask a Question</h1>
+        <br></br>
+
         
-        <Form onSubmit={this.handlesubmit}>
+        <Form onSubmit={this.handlesubmit} className="formControl">
             <Form.Row>
             <Form.Group controlId="title">
                 <Form.Label className="questionLabel">QuestionTitle</Form.Label>
-                <Form.Control className="answerField" placeholder="Enter title" />
+                <Form.Control className="answerField" placeholder="Enter title"/>
             </Form.Group>
             </Form.Row>
 
             <Form.Row>
-    <Form.Group controlId="course">
-    <Form.Label className="questionLabel">What USC Computer Science Course relates most to the question?</Form.Label>
-    <Form.Control className="answerField" as="select">
-    <option value="USC Courses" defaultValue>Select Course</option>
-      <option value="CSCI 103">CSCI 103</option>
-      <option value="CSCI 201">CSCI 201</option>
-      <option value="CSCI 104">CSCI 104</option>
-      <option value="CSCI 170">CSCI 170</option>
-      <option value="CSCI 109">CSCI 109</option>
-    </Form.Control>
-  </Form.Group>
-  </Form.Row>
+                <Form.Group controlId="course">
+                <Form.Label className="questionLabel">What USC Computer Science Course relates most to the question?</Form.Label>
+                <Form.Control className="answerField" as="select">
+                <option value="USC Courses" defaultValue>Select Course</option>
+                <option value="CSCI 103">CSCI 103</option>
+                <option value="CSCI 201">CSCI 201</option>
+                <option value="CSCI 104">CSCI 104</option>
+                <option value="CSCI 170">CSCI 170</option>
+                <option value="CSCI 109">CSCI 109</option>
+                </Form.Control>
+            </Form.Group>
+            </Form.Row>
             
-  <Form.Row>
+            <Form.Row>
             <Form.Group controlId="body">
                 <Form.Label className ="questionLabel">Enter Question</Form.Label>
                 <Form.Control className="answerField" as="textarea" cols="50" />
             </Form.Group>
             </Form.Row>
 
-
-        <Button type="submit" >Ask Question</Button>
-        </Form>
+            <div class="submitButon">
+            <Button type="submit">Ask Question</Button>
+            </div>
+        </Form> 
         </div>
-
         );
-        
     }
 
 

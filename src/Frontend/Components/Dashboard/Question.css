@@ -2,6 +2,53 @@
     font-family: Raleway;
     color: white;
     font-weight: bold;
-
+    width: 100%;
+    text-align: center;
 }
 
+.titleFormat{
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    margin-left: 53%;
+    position: relative;
+}
+
+.form-row{
+    width: 100%;
+}
+
+.form-group{
+    width: 100%;
+}
+.col-md-6{
+    width: 100%;
+    position: relative;
+}
+
+.answerField{
+    left: 0%;
+}
+
+.formControl {
+    margin-left: 50%;
+    width: 100%;
+}
+
+.btn-primary
+{
+    background-color: rgb(78, 11, 11);
+    border-color: rgb(78, 11, 11);
+}
+
+.btn-primary:hover{
+    background-color: red;
+    border-color: rgb(78, 11, 11);
+}
+
+.submitButon
+{
+    margin-top: 1rem;
+    margin-left: 40%;
+}

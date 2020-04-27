@@ -79,7 +79,7 @@
 }
 
 .forumsContainer {
-  grid-area: 5 / 3 / 10 / 4;
+  grid-area: 5 / 3 / 9 / 4;
   background-color: rgb(78, 11, 11);
   overflow-y: scroll;
 }
@@ -209,8 +209,16 @@
   border-style: solid;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-  margin: 2% 40% 0% 40%;
-  width: 50%;
+  margin: 2% 0% 0% 0%;
+  width: 100%;
+}
+
+.questionButton:hover {
+  background-color: rgb(178,34,34);
+}
+
+.askQuestionButton:hover {
+  background-color: rgb(178,34,34);
 }
 
 .popularForumLink {
