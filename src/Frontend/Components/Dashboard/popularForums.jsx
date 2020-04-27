@@ -124,7 +124,7 @@ export const popularForums = [
   },
   {
     id: 104,
-    question: "What are the Most Abundant Carrers in CS?",
+    question: "What are the Most Abundant Careers in CS?",
     upvotes: 12,
     downvotes: 3,
     thread: [
