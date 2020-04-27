@@ -24,6 +24,11 @@ class Dashboard extends Component {
             WELCOME, {localStorage.getItem("fullName")}
           </h1>
         </div>
+        <div className="questionContainer">
+        <Link to="/dashboard/questions">
+            <button className="askQuestionButton" >+ Question</button>
+        </Link>
+        </div>
         <div className="userSearchBarContainer">
           <input
             className="userSearchBar"

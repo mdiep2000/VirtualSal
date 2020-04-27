@@ -60,6 +60,9 @@
   overflow-y: scroll;
 }
 
+
+
+
 .reviewTitleContainer {
   grid-area: 6 / 1 / 9 / 3;
 }
@@ -192,6 +195,22 @@
   padding-bottom: 0.5em;
   margin: 2% 40% 0% 40%;
   overflow-x: hidden;
+}
+
+
+.askQuestionButton {
+  color: white;
+  font-size: 1em;
+  font-family: "Raleway";
+  text-align: center;
+  background-color: rgb(78, 5, 5);
+  border-color: rgb(43, 0, 0);
+  border-width: 5%;
+  border-style: solid;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  margin: 2% 40% 0% 40%;
+  width: 50%;
 }
 
 .popularForumLink {
