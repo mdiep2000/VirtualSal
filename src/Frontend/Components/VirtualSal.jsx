@@ -7,6 +7,7 @@ import DashboardLanding from "./Dashboard/DashboardLanding.jsx";
 import Navbar from "./Navbar.jsx";
 import Info from "./Dashboard/Info.jsx";
 import "./../App.css";
+import Question from "./Dashboard/Question.jsx"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 class VirtualSal extends Component {
@@ -43,6 +44,9 @@ class VirtualSal extends Component {
               </Route>
               <Route path="/info">
                 <Info />
+              </Route>
+              <Route path="/dashboard/questions">
+                <Question />
               </Route>
             </Switch>
           </div>

@@ -5,6 +5,7 @@ import GuestDashboard from "./GuestDashboard";
 import Forums from "./Forums";
 import SearchResults from "../Search/SearchResults";
 import { popularForums } from "./popularForums.jsx";
+import Question from "./Question.jsx";
 
 class DashboardLanding extends Component {
   state = {
@@ -48,7 +49,11 @@ class DashboardLanding extends Component {
                 thread={forum.thread}
               />
             </Route>
+
           ))}
+          <Route path="/dashboard/questions">
+            <Question />
+          </Route>
         </Switch>
       </Router>
     );

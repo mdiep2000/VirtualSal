@@ -81,7 +81,6 @@ class SignUp extends Component {
           }
           event.preventDefault();
           event.stopPropagation();
-          return;
         }
         localStorage.setItem("username", username);
         localStorage.setItem("fullName", firstname + " " + lastname);
@@ -110,7 +109,6 @@ class SignUp extends Component {
       alert("You are now signed up!");
     }
     */
-    alert("You are now signed up");
   };
 
   render() {
