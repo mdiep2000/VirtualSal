@@ -53,7 +53,7 @@ class Question extends Component {
         <Form onSubmit={this.handlesubmit} className="formControl">
             <Form.Row>
             <Form.Group controlId="title">
-                <Form.Label className="questionLabel">QuestionTitle</Form.Label>
+                <Form.Label className="questionLabel">Question Title</Form.Label>
                 <Form.Control className="answerField" placeholder="Enter title"/>
             </Form.Group>
             </Form.Row>
