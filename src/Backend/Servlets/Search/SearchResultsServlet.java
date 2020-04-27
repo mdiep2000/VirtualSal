@@ -25,7 +25,7 @@ import Servlets.Review.Review;
 @WebServlet("/SearchResultsServlet")
 public class SearchResultsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    Vector<String> jsonStrings = new Vector<String>();
+    Map<String, String> jsonStrings = new HashMap<>();
 
     public SearchResultsServlet() {
         super();
@@ -79,9 +79,9 @@ class SearchThread extends Thread
 {
     String searchBarInput;
     String searchType;
-    Vector<String> jsonStrings;
+    Map<String, String> jsonStrings;
 
-    public SearchThread(String searchBarInput, String searchType, Vector<String> jsonStrings)
+    public SearchThread(String searchBarInput, String searchType, Map<String, String> jsonStrings)
     {
         this.searchBarInput = searchBarInput;
         this.searchType = searchType;
@@ -97,7 +97,7 @@ class SearchThread extends Thread
             String question = new Gson().toJson(q);
             if(q.isValid() == true)
             {
-            	jsonStrings.add(question);
+            	jsonStrings.put("forum", question);
             }
         }
         // Find Review
@@ -107,7 +107,7 @@ class SearchThread extends Thread
             String professorReview = new Gson().toJson(pr);
             if(!pr.reviewList.isEmpty())
             {
-            	jsonStrings.add(professorReview);
+            	jsonStrings.put("review", professorReview);
             }
         }
         // Find Course
@@ -118,7 +118,7 @@ class SearchThread extends Thread
             String json = new Gson().toJson(data);
             if(!data.isEmpty())
             {
-            	jsonStrings.add(json);
+            	jsonStrings.put("course", json);
             }
         }
     }
