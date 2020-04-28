@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d2bdb73d31ec83dd59cde52dc31a38af",
+    "revision": "0d9d473b6ac562d52d0e475e8f4e4ad1",
     "url": "/VirtualSal/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/VirtualSal/static/css/2.89f067aa.chunk.css"
   },
   {
-    "revision": "3253d7eca5417fbfc754",
+    "revision": "dae76f4ecc21d7599ede",
     "url": "/VirtualSal/static/css/main.86752e3d.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/VirtualSal/static/js/2.a45a9438.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "3253d7eca5417fbfc754",
-    "url": "/VirtualSal/static/js/main.a0f9ad0b.chunk.js"
+    "revision": "dae76f4ecc21d7599ede",
+    "url": "/VirtualSal/static/js/main.cacbb83f.chunk.js"
   },
   {
     "revision": "2d45edc884f2c44f87c3",

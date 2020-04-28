@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/VirtualSal/static/css/main.86752e3d.chunk.css",
-    "main.js": "/VirtualSal/static/js/main.a0f9ad0b.chunk.js",
-    "main.js.map": "/VirtualSal/static/js/main.a0f9ad0b.chunk.js.map",
+    "main.js": "/VirtualSal/static/js/main.cacbb83f.chunk.js",
+    "main.js.map": "/VirtualSal/static/js/main.cacbb83f.chunk.js.map",
     "runtime-main.js": "/VirtualSal/static/js/runtime-main.da7b39ff.js",
     "runtime-main.js.map": "/VirtualSal/static/js/runtime-main.da7b39ff.js.map",
     "static/css/2.89f067aa.chunk.css": "/VirtualSal/static/css/2.89f067aa.chunk.css",
     "static/js/2.a45a9438.chunk.js": "/VirtualSal/static/js/2.a45a9438.chunk.js",
     "static/js/2.a45a9438.chunk.js.map": "/VirtualSal/static/js/2.a45a9438.chunk.js.map",
     "index.html": "/VirtualSal/index.html",
-    "precache-manifest.805521c24f7a2790d1411c3425626462.js": "/VirtualSal/precache-manifest.805521c24f7a2790d1411c3425626462.js",
+    "precache-manifest.96e447d6d5a561cd576e10b1c11e3fc7.js": "/VirtualSal/precache-manifest.96e447d6d5a561cd576e10b1c11e3fc7.js",
     "service-worker.js": "/VirtualSal/service-worker.js",
     "static/css/2.89f067aa.chunk.css.map": "/VirtualSal/static/css/2.89f067aa.chunk.css.map",
     "static/css/main.86752e3d.chunk.css.map": "/VirtualSal/static/css/main.86752e3d.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.89f067aa.chunk.css",
     "static/js/2.a45a9438.chunk.js",
     "static/css/main.86752e3d.chunk.css",
-    "static/js/main.a0f9ad0b.chunk.js"
+    "static/js/main.cacbb83f.chunk.js"
   ]
 }
