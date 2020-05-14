@@ -1,6 +1,6 @@
 ## VirtualSal
 
-Final project for CSCI 201. Collaborated with Josh Meidl, Ahmed Yacoob, Jafur Ahmed, Melina Eliasyan, Yiwen Wang.
+Final project for CSCI 201. Collaborated with Josh Meidl, Ahmed Yacoob, Jafer Ahmed, Melina Eliasyan, Yiwen Wang.
 
 ### Description
 
